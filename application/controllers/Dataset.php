@@ -8,7 +8,7 @@ class Dataset extends CI_Controller
 		parent::__construct();
 		$this->load->model('m_displaytable');
 		$this->load->model('m_cruddataset');
-		$this->load->model('m_term');
+		$this->load->model('m_doc_extraction');
 
 		if(!$this->session->userdata('logged_in')){
 			redirect ('/');
@@ -61,7 +61,7 @@ class Dataset extends CI_Controller
 		$kategori = $this->input->post('kategori');
 		$sentimen = $this->input->post('sentimenawal');
 		$lastid = $this->m_cruddataset->inputdataset($judul,$isi,$kategori,$sentimen);
-		$this->m_term->insertterm($lastid, $isi);
+		$this->m_doc_extraction->insertterm($lastid, $isi);
 
 		if($lastid){
 			$this->session->set_flashdata('notification','input_review_success');
@@ -79,7 +79,7 @@ class Dataset extends CI_Controller
 		$sentimen = $this->input->post('sentimenawal');
 		$idreview = $this->input->post('id_review');
 		$edit_review = $this->m_cruddataset->editdataset($judul,$isi,$kategori,$sentimen,$idreview);
-		$this->m_term->editterm($idreview,$isi);
+		$this->m_doc_extraction->editterm($idreview,$isi);
 
 		if($edit_review){
 			$this->session->set_flashdata('notification','edit_review_success');

@@ -1,6 +1,7 @@
 <?php
 
 $dashboard_active = "";
+$akurasi_active = "";
 $dataset_active = "";
 $katadasar_active = "";
 $stopwords_active = "";
@@ -12,6 +13,10 @@ if(isset($title)){
     switch ($title) {
         case 'dashboard':
             $dashboard_active = "active-menu";
+            break;
+
+        case 'akurasi':
+            $akurasi_active = "active-menu";
             break;
 
         case 'dataset':
@@ -80,6 +85,9 @@ if(isset($title)){
                 <ul class="nav" id="main-menu">
                     <li>
                         <a class="<?=$dashboard_active?>" href="<?=site_url()?>dashboard"><i class="fa fa-dashboard"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="<?=$akurasi_active?>" href="<?=site_url()?>akurasi"><i class="fa fa-calculator"></i>Hitung Akurasi</a>
                     </li>
                     <li>
                         <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="fa fa-tasks"></i> Dataset</a>

@@ -22,6 +22,27 @@ class M_Displaytable extends CI_Model
 		return $this->db->get()->row_array();
 	}
 
+	public function displaytabeltrain($start, $length, $search_query){
+		//count all matching term
+		$this->db->like('term', $search_query);
+		$this->db->from('sa_term');
+		$this->db->order_by('term','ASC');
+		$totalfilter = $this->db->count_all_results();
+
+		//limit matching reviews per page
+		$this->db->like('term', $search_query);
+		$this->db->from('sa_term');
+		$this->db->order_by('term','ASC');
+		$this->db->limit($length, $start);
+		$data = $this->db->get()->result_array();
+		$total = $this->db->count_all_results('sa_term');
+		return [
+			"data" => $data,
+			"total" => $total,
+			"result" => $totalfilter
+		];	
+	}
+
 	public function displaytabeltest($start, $length, $search_query){
 		//count all matching reviews
 		$this->db->like('judul_review', $search_query);
@@ -109,17 +130,17 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytermtokenized($start, $length, $search_query){
-	//count all matching stopwords
+	//count all matching review
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
-		$this->db->join('sa_term', 'sa_term.id_review = sa_review.id_review');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching stopwords per page
+		//limit matching review per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
-		$this->db->join('sa_term', 'sa_term.id_review = sa_review.id_review');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$this->db->limit($length, $start);
 		$data = $this->db->get()->result_array();
@@ -132,17 +153,17 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytermfiltered($start, $length, $search_query){
-	//count all matching stopwords
+	//count all matching review
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
-		$this->db->join('sa_term', 'sa_term.id_review = sa_review.id_review');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching stopwords per page
+		//limit matching review per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
-		$this->db->join('sa_term', 'sa_term.id_review = sa_review.id_review');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$this->db->limit($length, $start);
 		$data = $this->db->get()->result_array();
@@ -155,17 +176,17 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytermstemmed($start, $length, $search_query){
-	//count all matching stopwords
+	//count all matching review
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
-		$this->db->join('sa_term', 'sa_term.id_review = sa_review.id_review');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching stopwords per page
+		//limit matching review per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
-		$this->db->join('sa_term', 'sa_term.id_review = sa_review.id_review');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$this->db->limit($length, $start);
 		$data = $this->db->get()->result_array();

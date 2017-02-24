@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_Term extends CI_Model{
+class M_Doc_Extraction extends CI_Model{
 
 	private $katadasar;
 
@@ -564,7 +564,7 @@ class M_Term extends CI_Model{
 
 
 
-	/*------------INSERT TERM TO DATABASE------------*/
+	/*------------INSERT BAG OF WORDS KE DATABASE------------*/
 	public function insertterm($id,$isi){
 
 		$hasiltoken = $this->tokenizing($isi);
@@ -572,7 +572,7 @@ class M_Term extends CI_Model{
 		$hasilstemming = $this->stemming($hasilfilter); 
 
 		//insert ke database
-		$this->db->insert('sa_term',['id_review'=>$id,'term_tokenized'=>$hasiltoken,'term_filtered'=>$hasilfilter,'term_stemmed'=>$hasilstemming]);
+		$this->db->insert('sa_bagofwords',['id_review'=>$id,'term_tokenized'=>$hasiltoken,'term_filtered'=>$hasilfilter,'term_stemmed'=>$hasilstemming]);
 
 	}
 
@@ -584,206 +584,10 @@ class M_Term extends CI_Model{
 
 		//update database
 		$this->db->where('id_review',$id);
-		$this->db->update('sa_term',['term_tokenized'=>$hasiltoken,
+		$this->db->update('sa_bagofwords',['term_tokenized'=>$hasiltoken,
 			'term_filtered'=>$hasilfilter,'term_stemmed'=>$hasilstemming]);
 	}
 
-	/*------------DASHBOARD------------*/
-
-	//count total reviews
-	public function count_total_review(){
-		$this->db->select('id_review');
-		$this->db->from('sa_review');
-		$total_review = $this->db->count_all_results();
-		return $total_review;
-	}
-
-	//count total positive reviews
-	public function count_pos_review(){
-		$this->db->select('id_review');
-		$this->db->from('sa_review');
-		$this->db->where('sentimen_review','POSITIF');
-		$total_pos_review = $this->db->count_all_results();
-		return $total_pos_review;
-	}
-
-	//count total negative reviews
-	public function count_neg_review(){
-		$this->db->select('id_review');
-		$this->db->from('sa_review');
-		$this->db->where('sentimen_review','NEGATIF');
-		$total_neg_review = $this->db->count_all_results();
-		return $total_neg_review;
-	}
-
-	//get all IDs of data uji reviews
-	public function get_id_uji(){
-		$this->db->select('id_review');
-		$this->db->from('sa_review');
-		$this->db->where('kategori_review','DATA UJI');
-		$this->db->order_by('judul_review','ASC');
-		$array_id_uji = $this->db->get()->result_array();
-		$array_id_uji = array_column($array_id_uji,'id_review');
-		return $array_id_uji;
-	}
-
-	/*------------TERMS------------*/
-	//get an array of terms from all reviews
-	public function array_terms(){
-		$this->db->select('term_stemmed');
-		$this->db->from('sa_term');
-		$array_terms = $this->db->get()->result_array();
-		$array_terms= array_column($array_terms,'term_stemmed');
-		$all_terms = implode(" ",$array_terms);
-		$array_terms = explode(" ",$all_terms);
-		return $array_terms;
-	}
-
-	//get an array of terms from positive reviews
-	public function array_pos_terms(){
-		$this->db->select('term_stemmed');
-		$this->db->from('sa_term');
-		$this->db->join('sa_review', 'sa_review.id_review = sa_term.id_review');
-		$this->db->where('sa_review.sentimen_review','POSITIF');
-		$array_pos_terms = $this->db->get()->result_array();
-		$array_pos_terms= array_column($array_pos_terms,'term_stemmed');
-		$all_pos_terms = implode(" ",$array_pos_terms);
-		$array_pos_terms = explode(" ",$all_pos_terms);
-		return $array_pos_terms;
-	}
-
-	//get an array of terms from negative reviews
-	public function array_neg_terms(){
-		$this->db->select('term_stemmed');
-		$this->db->from('sa_term');
-		$this->db->join('sa_review', 'sa_review.id_review = sa_term.id_review');
-		$this->db->where('sa_review.sentimen_review','NEGATIF');
-		$array_neg_terms = $this->db->get()->result_array();
-		$array_neg_terms= array_column($array_neg_terms,'term_stemmed');
-		$all_neg_terms = implode(" ",$array_neg_terms);
-		$array_neg_terms = explode(" ",$all_neg_terms);
-		return $array_neg_terms;
-	}
-
-	//count total terms of dataset
-	public function count_total_terms(){
-		$array_terms = $this->array_terms();	
-		$total_terms = count($array_terms);
-		return $total_terms;
-	}
-
-	//count total terms from positive review
-	public function count_total_pos_terms(){
-		$array_pos_terms = $this->array_pos_terms();
-		$total_pos_terms = count($array_pos_terms);
-		return $total_pos_terms;
-	}
-
-	//count total term from negative review
-	public function count_total_neg_terms(){
-		$array_neg_terms = $this->array_neg_terms();
-		$total_neg_terms = count($array_neg_terms);
-		return $total_neg_terms;
-	}
-
-	//find the most common term
-	public function most_term(){
-		$this->db->select('term_stemmed');
-		$this->db->from('sa_term');
-		$array_terms = $this->db->get()->result_array();
-		$array_terms = array_column($array_terms,'term_stemmed');
-		$all_terms = implode(" ",$array_terms);
-		$array_terms = explode(" ",$all_terms);
-		$array_terms = array_count_values($array_terms);
-		arsort($array_terms);
-		$most_term = key($array_terms);
-		return $most_term;
-	}
-
-	//function to count the number of occurences of term
-	public function occurences($term, $array_terms){
-		$occurences=0;
-		foreach ($array_terms as $key) {
-			if($key==$term){
-				$occurences++;
-			}
-		}
-		// $arraytmp = array_count_values($arrayterms);
-		// $occurences = $arraytmp[$term];
-		return $occurences;
-	}
-
-	//get a number of unique terms from all reviews (vocabulary)
-	public function vocabulary(){
-		$array_terms = $this->array_terms();
-		$vocabulary = array_unique($array_terms);
-		$arrayvocabulary = array();
-		foreach ($vocabulary as $unique_term) {
-			array_push($arrayvocabulary,$unique_term);
-		}
-		return $arrayvocabulary;
-	}
-
-	
-	/*------------PRIOR PROBABILITY------------*/
-	//prior probability for positive review: pos reviews/total reviews
-	public function pos_prior_prob(){
-		$pos_prior_prob = $this->count_pos_review() / $this->count_total_review();
-		return $pos_prior_prob;
-	}
-
-	//prior probability for negative review: neg reviews/total reviews
-	public function neg_prior_prob(){
-		$neg_post_prob = $this->count_neg_review() / $this->count_total_review();
-		return $neg_post_prob;
-	}
-
-	/*------------POSTERIOR PROBABILITY------------*/
-	//count the positive posterior probability of a term in positive review
-	public function pos_post_prob($term){
-		//n_k = number of term's occurences in positive reviews
-		$array_pos_terms = $this->array_pos_terms();
-		$n_k = $this->occurences($term,$array_pos_terms);
-		
-		//n = total of terms in positive reviews
-		$n = $this->count_total_pos_terms();
-
-		//vocabulary = total of unique terms (vocabulary of terms)
-		$vocab = count($this->vocabulary());
-
-		/*term's posterior probability of positive class = (number of term's occurences in positive reviews + 1)/(total of terms in positive reviews + total of unique terms)*/
-		$pos_post_prob = ($n_k + 1) / ($n + $vocab);
-		return $pos_post_prob;
-	}
-
-	//count the negative posterior probability of a term in negative review
-	public function neg_post_prob($term){
-		//n_k = number of term's occurences in negative reviews
-		$array_neg_terms = $this->array_neg_terms();
-		$n_k = $this->occurences($term,$array_neg_terms);
-		
-		//n = total of terms in negative reviews
-		$n = $this->count_total_neg_terms();
-
-		//vocabulary = total of unique terms (vocabulary of terms)
-		$vocab = count($this->vocabulary());
-
-		/*term's posterior probability of negative class = (number of term's occurences in negative reviews + 1)/(total of terms in negative reviews + total of unique terms)*/
-		$neg_prior_prob = ($n_k+1)/($n+$vocab);
-		return $neg_prior_prob;
-	}
-
-	/*------------TRAIN DATA------------*/
-
-	public function train_pos_post_prob(){
-		$array_pos = array();
-		$vocab = $this->vocabulary();
-		foreach ($vocab as $term) {
-			$array_pos[$term] = $this->pos_post_prob($term);
-		}
-
-		return $array_pos;
-	}
 
 }
 ?>

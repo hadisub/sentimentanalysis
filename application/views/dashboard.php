@@ -34,10 +34,10 @@
                     <div class="panel panel-primary text-center no-border bg-color-blue">
                         <div class="panel-body">
                             <i class="fa fa-database fa-5x"></i>
-                            <h3><?php echo $total_review; ?></h3>
+                            <h3><?php echo $total_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-blue">
-                            Total Review
+                            Jumlah Review Data Latih
                         </div>
                     </div>
                 </div>
@@ -46,10 +46,10 @@
                     <div class="panel panel-primary text-center no-border bg-color-green">
                         <div class="panel-body">
                             <i class="fa fa-plus-square fa-5x"></i>
-                            <h3><?php echo $pos_review; ?></h3>
+                            <h3><?php echo $pos_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-green">
-                            Review Positif
+                            Review Data Latih Positif
                         </div>
                     </div>
                 </div>
@@ -58,10 +58,10 @@
                     <div class="panel panel-primary text-center no-border bg-color-red">
                         <div class="panel-body">
                             <i class="fa fa-minus-square fa-5x"></i>
-                            <h3><?php echo $neg_review; ?></h3>
+                            <h3><?php echo $neg_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-red">
-                            Review Negatif
+                            Review Data Latih Negatif
                         </div>
                     </div>
                 </div>
@@ -69,11 +69,11 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-border bg-color-brown">
                         <div class="panel-body">
-                            <i class="fa fa-pie-chart fa-5x"></i>
-                            <h3>78%</h3>
+                            <i class="fa fa-clone fa-5x"></i>
+                            <h3><?php echo $total_testdata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-brown">
-                            Akurasi Tes Terakhir
+                            Jumlah Review Data Uji
                         </div>
                     </div>
                 </div>
@@ -81,13 +81,15 @@
             </div>
             <!-- END OF CARDS -->
 
-            <!-- BUTTON HITUNG AKURASI-->
+            <p><?php print_r($testing);?></p>
+            <!-- BUTTON TRAIN DATA-->
             <div class="text-right">
-                <button class="btn btn-lg btn-primary" id="akurasibtn"><i class="fa fa-dashboard"></i> Hitung Akurasi</button>
+                <button class="btn btn-lg btn-primary" id="trainbtn"><i class="fa fa-cogs"></i> Latih Sistem</button>
             </div>
 
+            <!-- <p class="text-muted text-center">Tidak ada hasil training yang tersedia. Silahkan tambahkan review ke dalam dataset anda</p> -->
             <!-- TABLE STARTS HERE-->
-            <div id="divtabeltest">
+            <div id="divtabeltraining">
                 <!--TABLE CONTENTS ARE LOADED HERE -->
             </div>
             <!--TABLE ENDS HERE -->      

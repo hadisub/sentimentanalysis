@@ -1,6 +1,4 @@
-
-
-<!--TABEL DATA UJI -->
+<!--TABEL HASIL TRAINING -->
 <div class="row">
     <div class="col-md-12">
     <!-- Advanced Tables -->
@@ -10,12 +8,9 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th width="25%">Judul Review</th>
-                            <th>Label Sentimen</th>
-                            <th>P <em>Pos</em></th>
-                            <th>P <em>Neg</em></th>
-                            <th>Hasil Analisis</th>
-                            <th>Hasil</th>
+                            <th width="25%">Term</th>
+                            <th>Jumlah Kemunculan di Data Latih Positif</th>
+                            <th>Jumlah Kemunculan di Data Latih Negatif</th>
                         </tr>
                     </thead>
                 </table>
