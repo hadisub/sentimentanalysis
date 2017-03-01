@@ -81,7 +81,7 @@
             </div>
             <!-- END OF CARDS -->
 
-            <p><?php print_r($testing);?></p>
+            <!-- <p><?php print_r($testing);?></p> -->
             <!-- BUTTON TRAIN DATA-->
             <div class="text-right">
                 <button class="btn btn-lg btn-primary" id="trainbtn"><i class="fa fa-cogs"></i> Latih Sistem</button>

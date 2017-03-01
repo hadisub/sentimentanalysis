@@ -52,16 +52,6 @@ class M_Classifier extends CI_Model{
 		return $array_terms;
 	}
 
-	//ambil array semua term yang unik dari semua data latih (vocabulary)
-	public function vocabulary(){
-		$array_terms = $this->array_terms();
-		$vocabulary = array_unique($array_terms);
-		$arrayvocabulary = array();
-		foreach ($vocabulary as $unique_term) {
-			array_push($arrayvocabulary,$unique_term);
-		}
-		return $arrayvocabulary;
-	}
 
 	//ambil array semua term dari data latih positif
 	public function array_pos_terms(){
@@ -91,39 +81,73 @@ class M_Classifier extends CI_Model{
 		return $array_neg_terms;
 	}
 
-	//hitung kemunculan term t di review data latih positif
-	public function array_occ(){
-		$array_occ = array();
-		//$vocab = $this->vocabulary();
+	/*----PROSES TRAINING----*/
+
+	//ambil array semua term yang unik dari semua data latih (vocabulary)
+	public function vocabulary(){
 		$array_terms = $this->array_terms();
+		$vocabulary = array_unique($array_terms);
+		$array_vocabulary = array();
+		foreach ($vocabulary as $unique_term) {
+			array_push($array_vocabulary,$unique_term);
+		}
+		return $array_vocabulary;
+	}
+
+	//hitung kemunculan (occurences) term t di data latih positif lalu masukkan nilainya ke dalam array
+	public function get_pos_occurences(){
+		$array_pos_occs = array();
+		$vocab = $this->vocabulary();
 		$array_pos_terms = $this->array_pos_terms();
-		$array_pos_terms = array_count_values($array_pos_terms);
+		$array_pos_values = array_count_values($array_pos_terms);
 
+		foreach ($vocab as $term) {
+			if(isset($array_pos_values[$term])){
+				$array_pos_occs[] = $array_pos_values[$term];
+			}
+			else{
+				$array_pos_occs[] = 0;
+			}
+
+		}
+		return $array_pos_occs;		
+	}
+
+	public function get_neg_occurences(){
+		$array_neg_occs = array();
+		$vocab = $this->vocabulary();
 		$array_neg_terms = $this->array_neg_terms();
-		$array_neg_terms = array_count_values($array_neg_terms);
+		$array_neg_values = array_count_values($array_neg_terms);
 
-		foreach ($array_terms as $term) {
-			if(isset($array_pos_terms[$term])){
-				$array_occ[$term]['positif'] = $array_pos_terms[$term];
+		foreach ($vocab as $term) {
+			if(isset($array_neg_values[$term])){
+				$array_neg_occs[] = $array_neg_values[$term];
 			}
 			else{
-				$array_occ[$term]['positif'] = 0;
+				$array_neg_occs[] = 0;
 			}
-			if(isset($array_neg_terms[$term])){
-				$array_occ[$term]['negatif'] = $array_neg_terms[$term];
-			}
-			else{
-				$array_occ[$term]['negatif'] = 0;
-			}
+
+		}
+		return $array_neg_occs;		
+	}
+
+	public function array_term_occ(){
+		$array_occ=array();
+		$vocab = $this->vocabulary();
+		$array_pos_occ = $this->get_pos_occurences();
+		$array_neg_occ = $this->get_neg_occurences();
+		$limit = count($vocab);
+		for($i=0; $i<$limit; $i++){
+			$array_occ[] = array("term"=>$vocab[$i],"pos_occ"=>$array_pos_occ[$i],"neg_occ"=>$array_neg_occ[$i]); 
 		}
 		return $array_occ;
 	}
 
-/*----INSERT TERM KE DATABASE----*/
-public function insert_term(){
-	$this->db->truncate('sa_term');
-
-	$this->db->insert_batch('sa_term',$data);	
-	
+	/*----INSERT TERM KE DATABASE----*/
+	public function insert_term(){
+		$this->db->truncate('sa_term');
+		$data = $this->array_term_occ();
+		$this->db->insert_batch('sa_term',$data);	
+		}
 }
 ?>

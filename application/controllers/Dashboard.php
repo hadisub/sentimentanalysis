@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller{
 		$data['pos_traindata'] = $this->m_classifier->count_pos_traindata();
 		$data['neg_traindata'] = $this->m_classifier->count_neg_traindata();
 		$data['total_testdata'] = $this->m_classifier->count_testdata();
-		$data['testing'] = $this->m_classifier->array_occ();
+		//$data['testing'] = $this->m_classifier->array_terms();
 		$this->load->view('dashboard',$data);
 	}
 

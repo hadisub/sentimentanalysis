@@ -8,8 +8,8 @@ class M_Doc_Extraction extends CI_Model{
 	/*------------TOKENIZING------------*/
 	public function tokenizing($review){
 		$lowercase = strtolower($review);
+		$tokens = preg_replace('/[^a-z \-]/','', $tokens);
 		$tokens = preg_replace('/\s+/', ' ', $lowercase);
-		$tokens = preg_replace('/[^a-z -]/','', $tokens);
 		return $tokens;
 		}
 
@@ -62,11 +62,43 @@ class M_Doc_Extraction extends CI_Model{
 
 			else{
 				
-				// //untuk kata berulang, hilangkan kata setelah hyphen (-)
-				// if (preg_match('/(-)/',$term)){
-				// $term = strtok($term,'-');
-				// }
-				
+				//untuk kata berulang
+				/*if ada tanda hubungnya{
+					pecah jadi dua bagian, a dan b;
+					if(a==b){
+						array_push($arraystemmed, a);
+						continue;
+					}
+					else <-- iki maksute lek a dan b bedo yes
+					{
+						a dicek kata dasar e sampek ketemu karo proses nang ngisor iki;
+						b yo pisan;
+						if (a sing wes dadi kata dasar podo karo b sing wes dadi kata dasar){
+							array_push(#arraystemmed, a sing wes dadi kata dasar);
+						}
+						else{
+							array_push(#arraystemmed, a sing wes dadi kata dasar);
+							array_push(#arraystemmed, b sing wes dadi kata dasar);	
+						}
+					}
+				}
+				*/
+
+				if(preg_match(('/\-/',$term))){
+					$split = explode("-",$kata);
+					$katasatu = $split[0];
+					$katadua = $split[1];
+
+					if($katasatu==$katadua){
+						$term = $katasatu;
+						array_push($arraystemmed, $term);
+					}
+					else{
+						$katasatu = $this->del_inf_suff($katasatu);
+						//----
+					}
+				}
+
 				$term = $this->del_inf_suff($term);
 				$cekterm = $this->cekterm($term);
 				if($cekterm==true){
@@ -554,7 +586,7 @@ class M_Doc_Extraction extends CI_Model{
 	     			}
 			}
 		}
-	//cek ada tidaknya awalan
+	//cek ada tidaknya awalan di-, ke-, se-, te-, be-, me- atau pe-
 		if(preg_match('/^(di|[kstbmp]e)/',$term) == FALSE){
 			return $thisterm;
 		}
