@@ -48,6 +48,8 @@ class M_Classifier extends CI_Model{
 		$array_terms = $this->db->get()->result_array();
 		$array_terms= array_column($array_terms,'term_stemmed');
 		$all_terms = implode(" ",$array_terms);
+		$all_terms = preg_replace('/\s+/', ' ', $all_terms);
+		$all_terms = trim($all_terms);
 		$array_terms = explode(" ",$all_terms);
 		return $array_terms;
 	}
@@ -63,6 +65,8 @@ class M_Classifier extends CI_Model{
 		$array_pos_terms = $this->db->get()->result_array();
 		$array_pos_terms= array_column($array_pos_terms,'term_stemmed');
 		$all_pos_terms = implode(" ",$array_pos_terms);
+		$all_pos_terms = preg_replace('/\s+/', ' ', $all_pos_terms);
+		$all_pos_terms = trim($all_pos_terms);
 		$array_pos_terms = explode(" ",$all_pos_terms);
 		return $array_pos_terms;
 	}
@@ -77,6 +81,8 @@ class M_Classifier extends CI_Model{
 		$array_neg_terms = $this->db->get()->result_array();
 		$array_neg_terms= array_column($array_neg_terms,'term_stemmed');
 		$all_neg_terms = implode(" ",$array_neg_terms);
+		$all_neg_terms = preg_replace('/\s+/', ' ', $all_neg_terms);
+		$all_neg_terms = trim($all_neg_terms);
 		$array_neg_terms = explode(" ",$all_neg_terms);
 		return $array_neg_terms;
 	}
@@ -149,5 +155,22 @@ class M_Classifier extends CI_Model{
 		$data = $this->array_term_occ();
 		$this->db->insert_batch('sa_term',$data);	
 		}
+
+	public function testingku(){
+		$arrayku = array();
+		
+		$this->db->select('term_stemmed');
+		$this->db->from('sa_bagofwords');
+		$this->db->join('sa_review', 'sa_review.id_review = sa_bagofwords.id_review');
+		$this->db->where('sa_review.judul_review','District 9');
+		$arrayku = $this->db->get()->result_array();
+		$arrayku = array_column($arrayku,'term_stemmed');
+		$alldata = implode(" ",$arrayku);
+		$alldata = preg_replace('/\s+/', ' ', $alldata);
+		$alldata = trim($alldata);
+		$arrayku = explode(" ",$alldata);
+		return $arrayku;
+	}
+
 }
 ?>

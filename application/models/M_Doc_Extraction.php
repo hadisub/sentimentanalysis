@@ -8,8 +8,8 @@ class M_Doc_Extraction extends CI_Model{
 	/*------------TOKENIZING------------*/
 	public function tokenizing($review){
 		$lowercase = strtolower($review);
-		$tokens = preg_replace('/[^a-z \-]/','', $tokens);
-		$tokens = preg_replace('/\s+/', ' ', $lowercase);
+		$tokens = preg_replace('/[^a-z \-]/','', $lowercase);
+		$tokens = preg_replace('/\s+/', ' ', $tokens);
 		return $tokens;
 		}
 
@@ -61,41 +61,28 @@ class M_Doc_Extraction extends CI_Model{
 			}
 
 			else{
-				
-				//untuk kata berulang
-				/*if ada tanda hubungnya{
-					pecah jadi dua bagian, a dan b;
-					if(a==b){
-						array_push($arraystemmed, a);
-						continue;
-					}
-					else <-- iki maksute lek a dan b bedo yes
-					{
-						a dicek kata dasar e sampek ketemu karo proses nang ngisor iki;
-						b yo pisan;
-						if (a sing wes dadi kata dasar podo karo b sing wes dadi kata dasar){
-							array_push(#arraystemmed, a sing wes dadi kata dasar);
-						}
-						else{
-							array_push(#arraystemmed, a sing wes dadi kata dasar);
-							array_push(#arraystemmed, b sing wes dadi kata dasar);	
-						}
-					}
-				}
-				*/
 
-				if(preg_match(('/\-/',$term))){
-					$split = explode("-",$kata);
+				if(preg_match('/\-/',$term)){
+					$split = explode("-",$term);
 					$katasatu = $split[0];
 					$katadua = $split[1];
 
 					if($katasatu==$katadua){
 						$term = $katasatu;
 						array_push($arraystemmed, $term);
+						continue;
 					}
 					else{
-						$katasatu = $this->del_inf_suff($katasatu);
-						//----
+						$katasatu = $this->cek_reduplikasi($katasatu);
+						$katadua = $this->cek_reduplikasi($katadua);
+						if($katasatu==$katadua){
+							array_push($arraystemmed, $katasatu);
+						}
+						else{
+							array_push($arraystemmed, $katasatu);
+							array_push($arraystemmed, $katadua);
+						}
+						continue;
 					}
 				}
 
@@ -594,6 +581,25 @@ class M_Doc_Extraction extends CI_Model{
 	return $term;
 	}
 
+	//aturan tambahan untuk kata ulang
+	public function cek_reduplikasi($kata){
+		$term = $this->del_inf_suff($kata);
+		$cekterm = $this->cekterm($term);
+		if($cekterm==true){
+			return $term;
+		}
+		$term = $this->del_der_suff($term);
+		$cekterm = $this->cekterm($term);
+		if($cekterm==true){
+			return $term;
+		}
+		$term = $this->del_der_pre($term);
+		$cekterm = $this->cekterm($term);
+		if($cekterm==true){
+			return $term;
+		}
+		return $kata;
+	}
 
 
 	/*------------INSERT BAG OF WORDS KE DATABASE------------*/
