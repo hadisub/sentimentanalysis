@@ -362,8 +362,10 @@ class M_Doc_Extraction extends CI_Model{
 		     			if($this->cekterm($__term__)){
 		     				return $__term__;
 		     			}
+				}
 
-		     		//jika setelah "mem-" ada "p"  luluh, ditambahkan "p" kembali di depan kata | "memaksa" -> "paksa"
+				if(preg_match('/^(mem)[aiueo]/',$term)){
+					//jika setelah "mem-" ada "p"  luluh, ditambahkan "p" kembali di depan kata | "memaksa" -> "paksa"
 		     		$__term = preg_replace('/^(mem)/','p',$term);
 		     			if($this->cekterm($__term)){
 		     				return $__term;
@@ -397,7 +399,7 @@ class M_Doc_Extraction extends CI_Model{
 		     				return $__term__;
 		     			}
 
-		     		//jika setelah "men-" ada "t"  luluh, ditambahkan "t" kembali di depan kata | "menawar" -> "tawar"
+		     		//jika setelah "men-" ada "t"  luluh, ditambahkan "t" kembali di depan kata | "menarik" -> "tarik"
 		     			$__term = preg_replace('/^(men)/','t',$term);
 		     				if($this->cekterm($__term)){
 		     				return $__term;
@@ -514,6 +516,18 @@ class M_Doc_Extraction extends CI_Model{
 		     		$__term = preg_replace('/^(pem)/','p',$term);
 		     			if($this->cekterm($__term)){
 		     				return $__term;
+		     			}
+				}
+
+				//jika setelah "pen-" ada "t" luluh | "penonton" -> "tonton"
+				if(preg_match('/^(pen)[aiueo]/',$term)){
+					$__term = preg_replace('/^(pen)/','t',$term);
+						if($this->cekterm($__term)){
+		     				return $__term;
+		     			}
+		     		$__term__ = $this->del_der_suff($__term);
+		     			if($this->cekterm($__term__)){
+		     				return $__term__;
 		     			}
 				}
 
