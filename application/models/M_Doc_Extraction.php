@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Doc_Extraction extends CI_Model{
 
-	private $katadasar;
+	private $arraykatadasar;
 
 	/*------------TOKENIZING------------*/
 	public function tokenizing($review){
@@ -54,6 +54,12 @@ class M_Doc_Extraction extends CI_Model{
 		//looping
 		foreach ($arrayfiltered as $kataawal){
 			$term = $kataawal;
+			
+			if(strlen($term)<=3){ //jangan stem kata di bawah tiga huruf
+				array_push($arraystemmed,$term);
+				continue;
+			}
+
 			$cekterm = $this->cekterm($term);
 			if($cekterm==true){
 				array_push($arraystemmed, $term);
@@ -62,7 +68,7 @@ class M_Doc_Extraction extends CI_Model{
 
 			else{
 
-				if(preg_match('/\-/',$term)){
+				if(preg_match('/\-/',$term)){ //stem untuk kata ulang
 					$split = explode("-",$term);
 					$katasatu = $split[0];
 					$katadua = $split[1];
@@ -161,7 +167,7 @@ class M_Doc_Extraction extends CI_Model{
 			return true;
 		}
 		
-		// ke- dan -i,-kan
+		// ke- dan -i |-kan
 		if(preg_match('/^(ke)[[:alpha:]]+(i|kan)\z/i',$term)){ 
 			return true;
 		}
@@ -171,7 +177,7 @@ class M_Doc_Extraction extends CI_Model{
 			return true;
 		}
 
-		// se- dan -i,-kan
+		// se- dan -i |-kan
 		if(preg_match('/^(se)[[:alpha:]]+(i|kan)\z/i',$term)){ 
 			return true;
 		}
@@ -183,33 +189,34 @@ class M_Doc_Extraction extends CI_Model{
 	//hilangkan derivation suffix ("-i","-an" atau "-kan")
 	public function del_der_suff($term){
 		$thisterm = $term; 
+
+		//hilangkan akhiran "-kan"
+		if(preg_match('/(kan)\z/i',$term)){
+			$__term = preg_replace('/(kan)\z/i','',$term);
+			if($this->cekterm($__term)){
+				return $__term;
+			}
+		}
+
+		//hilangkan akhiran "an"|"i"
 		if(preg_match('/(i|an)\z/i',$term)){
-			
-			//potong akhiran "-i" dan "-an"
 			$__term = preg_replace('/(i|an)\z/i','',$term);
 			if($this->cekterm($__term)){
 				return $__term;
-			} 
-			//jika tidak ditemukan di array kata dasar, potong "-kan" 
-			if(preg_match('/(kan)\z/i',$term)){
-				$__term =preg_replace('/(kan)\z/i','',$term);
-				if($this->cekterm($__term)){
-					return $__term;
-				}
 			}
-			//jika ada kombinasi awalan dan akhiran yang dilarang, return kata awal
-			if($this->cek_restr_presuff($term)){
-				return $thisterm;
-			}
+		}
+		//jika ada kombinasi awalan dan akhiran yang dilarang, return kata awal
+		if($this->cek_restr_presuff($term)){
+			return $term;
 		}
 		return $thisterm;
 	}
 
 	//hilangkan derivation prefix
 	public function del_der_pre($term){
-	$thisterm = $term; 
+	$thisterm = $term;
+	if(strlen($term)>=5){ //jumlah huruf minimal dari kata yang akan dipotong prefiksnya adalah 5 
 
-	//tentukan tipe awalan
 		//jika "di-", "ke-" atau "se-"
 		if(preg_match('/^(di|[ks]e)/',$term)){
 			$__term = preg_replace('/^(di|[ks]e)/','',$term);
@@ -499,9 +506,9 @@ class M_Doc_Extraction extends CI_Model{
 
 				}
 
-				// jika "men-" diikuti huruf "c","j","d","z"
-				if(preg_match('/^(meng)[ghqk]/',$term)){
-					$__term = preg_replace('/^(meng)/','',$term); //ATURAN 16 meng{g|h|q|k|}.. > meng-{g|h|q|k|}..
+				// jika "meng-" diikuti huruf "g","h","q"
+				if(preg_match('/^(meng)[ghq]/',$term)){
+					$__term = preg_replace('/^(meng)/','',$term); //ATURAN 16 meng{g|h|q}.. > meng-{g|h|q}..
 						if($this->cekterm($__term)){
 		     				return $__term;
 		     			}
@@ -511,20 +518,9 @@ class M_Doc_Extraction extends CI_Model{
 		     			}
 				}
 
-				// jika "meng-" diikuti huruf vokal
+				// jika "meng-" diikuti huruf vokal				
 				if(preg_match('/^(meng)[aiueo]/',$term)){
-					if(preg_match('/^(meng)[e]/',$term)){
-						$__term = preg_replace('/^(menge)/','',$term);
-						if($this->cekterm($__term)){
-		     				return $__term;
-		     			}
-		     			$__term__ = $this->del_der_suff($__term);
-		     			if($this->cekterm($__term__)){
-		     				return $__term__;
-		     			}
-					}
-
-					$__term = preg_replace('/^(meng)/','',$term); //ATURAN 17 mengV.. > meng-V.. | meng-kV.. | mengV-.. jika V="e"
+					$__term = preg_replace('/^(meng)/','',$term); //ATURAN 17 mengV.. > meng-V.. |meng-kV..
 						if($this->cekterm($__term)){
 		     				return $__term;
 		     			}
@@ -542,7 +538,7 @@ class M_Doc_Extraction extends CI_Model{
 		     			if($this->cekterm($__term__)){
 		     				return $__term__;
 		     			}
-				}				
+				}
 
 				//jika "meny-" diikuti huruf vokal
 				if(preg_match('/^(meny)[aiueo]/',$term)){
@@ -608,7 +604,7 @@ class M_Doc_Extraction extends CI_Model{
 				}
 
 				//jika "per-" diikuti huruf konsonan selain "r" dan huruf apapun lalu partikel selain "er"
-				if(preg_match('/^(per)[^aiueor][a-z](?!er)/',$term)){
+				if(preg_match('/^(per)[^aiueor]+[a-z]+(?!er)/',$term)){
 					$__term = preg_replace('/^(per)/','',$term); //ATURAN 22 perCAP.. > per-CAP di mana C!="r" & P!="er"
 						if($this->cekterm($__term)){
 		     				return $__term;
@@ -816,12 +812,14 @@ class M_Doc_Extraction extends CI_Model{
 
 			}
 		}
-	//cek ada tidaknya awalan di-, ke-, se-, te-, be-, me- atau pe-
+		//cek ada tidaknya awalan di-, ke-, se-, te-, be-, me- atau pe-
 		if(preg_match('/^(di|[kstbmp]e)/',$term) == false){
-			return $thisterm;
+			return $term;
 		}
 
-	return $term;
+	}
+	
+	return $thisterm;
 	}
 
 	//aturan tambahan untuk kata ulang
@@ -831,11 +829,13 @@ class M_Doc_Extraction extends CI_Model{
 		if($cekterm==true){
 			return $term;
 		}
+
 		$term = $this->del_der_suff($term);
 		$cekterm = $this->cekterm($term);
 		if($cekterm==true){
 			return $term;
 		}
+
 		$term = $this->del_der_pre($term);
 		$cekterm = $this->cekterm($term);
 		if($cekterm==true){
