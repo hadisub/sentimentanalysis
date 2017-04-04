@@ -1,67 +1,59 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Sentiment Analysis</title>
 	<meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="url" content="<?=base_url()?>" />
-  <link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="url" content="<?=base_url()?>" />
+	<link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/font-awesome.css">
-  <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/toastr.css">
-
-        <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
-		<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/material-icons.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/toastr.css">
 </head>
 <body>
-<div id="wrapper">
-        
-        <!--/. SIDEBAR TOP  -->
-        <?php $this->load->view('template'); ?>
-        <!-- /. END OF SIDEBAR  -->
-        <div id="page-wrapper">
-            <div id="page-inner">
+  <div id="wrapper">
+    <!--/. SIDEBAR TOP  -->
+    <?php $this->load->view('template'); ?>
+    
+    <!-- /. END OF SIDEBAR  -->
+    <div id="page-wrapper">
+      <div id="page-inner">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="page-header">
-                            Dataset Review Film
-                        </h2>
-                    </div>
-
-                </div>
-                <!-- TABLE LABEL-->
+        <div class="row">
+          <div class="col-md-12">
+              <h2 class="page-header">
+                Dataset Review Film
+              </h2>
+           </div>
+        </div>
             
-            <!--BUTTON TAMBAH -->
-            <div class="btn-fixed">            
-            <button data-target="#modaldataset" data-toggle="modal" class="btn btn-primary btn-circle-lg btn-circle btn-circle-lg btn-add"><i class="fa fa-plus fa-2x"></i></button>  
-            </div>
-
-				<!--TABLE-->
-				     <!-- /. ROW  -->
-               
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th width="25%">Judul</th>
-                                            <th>Sentimen</th>
-                                            <th>Kategori</th>
-                                            <th width="30%">Isi Review</th>
-                                            <th>Tindakan</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
+        <!--BUTTON TAMBAH -->
+        <div class="btn-fixed">            
+          <button data-target="#modaldataset" data-toggle="modal" class="btn btn-primary btn-circle-lg btn-circle btn-circle-lg btn-add"><i class="material-icons material-icons-2x">note_add</i></button>  
+        </div>
+        
+			   <!--TABLE-->   
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Advanced Tables -->
+					   <div class="panel-body">
+  						<div class="table-responsive">
+  							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+  								<thead>
+  									<tr>
+  										<th>No.</th>
+  										<th width="25%">Judul</th>
+  										<th>Sentimen</th>
+  										<th>Kategori</th>
+  										<th width="30%">Isi Review</th>
+  										<th>Tindakan</th>
+  									</tr>
+  								</thead>
+  							</table>
+  						</div>
+						
+					   </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
@@ -120,7 +112,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-success">
-                <i class = "fa fa-save"></i>   Simpan</button>
+                <i class = "material-icons">save</i>   Simpan</button>
             </div>
           </div>
           </form>
@@ -144,13 +136,17 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-danger">
-                <i class = "fa fa-trash"></i>   Hapus</button>
+                <i class = "material-icons">delete</i>   Hapus</button>
             </div>
           </div>
           </form>
       </div>
     </div>
     <!--END OF MODAL FORM-->
+	
+	<!--SCRIPTS-->
+	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
 
     <!-- DATA TABLE SCRIPTS -->
     <script src="<?=base_url()?>assets/js/dataTables/jquery.dataTables.js"></script>
@@ -160,18 +156,18 @@
 	<!-- METIS MENU SCRIPTS-->
 	<script src="<?=base_url()?>assets/js/jquery.metisMenu.js"></script>
   
-  <!-- Custom Js -->
-  <script src="<?=base_url()?>assets/js/custom-scripts.js"></script>
+	<!-- Custom Js -->
+	<script src="<?=base_url()?>assets/js/custom-scripts.js"></script>
 
-  <!-- CHARACTER COUNTERS FOR TEXTAREA-->
-  <script src="<?=base_url()?>assets/js/countcharacters.js"></script>
+	<!-- CHARACTER COUNTERS FOR TEXTAREA-->
+	<script src="<?=base_url()?>assets/js/countcharacters.js"></script>
 
-  <!-- FORM VALIDATION-->
-  <script src="assets/js/validation/jquery.validate.js"></script>
-  <script src="assets/js/validation/additional-methods.min.js"></script>
-  <script src="assets/js/validation/formvalidation.js"></script>
+	<!-- FORM VALIDATION-->
+	<script src="assets/js/validation/jquery.validate.js"></script>
+	<script src="assets/js/validation/additional-methods.min.js"></script>
+	<script src="assets/js/validation/formvalidation.js"></script>
 
-  <!-- TOASTR NOTIFICATIONS-->
+	<!-- TOASTR NOTIFICATIONS-->
     <script src="<?=base_url()?>assets/js/toastr.js"></script>
     
     <?php

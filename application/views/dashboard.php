@@ -1,22 +1,19 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Sentiment Analysis</title>
 	<meta charset="utf-8" />
-  <meta name="url" content="<?=base_url()?>" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.css">
+	<meta name="url" content="<?=base_url()?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/font-awesome.css">
-
-  	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/material-icons.css">
 </head>
 <body>
 
 <div id="wrapper">
-	<?php $this->load->view('template'); ?>	
+	<?php $this->load->view('template');?>	
 
 	<div id="page-wrapper">
     	<div id="page-inner">
@@ -33,7 +30,7 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-border bg-color-blue">
                         <div class="panel-body">
-                            <i class="fa fa-database fa-5x"></i>
+                            <i class="material-icons material-icons-5x">library_books</i>
                             <h3><?php echo $total_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-blue">
@@ -45,7 +42,7 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-border bg-color-green">
                         <div class="panel-body">
-                            <i class="fa fa-plus-square fa-5x"></i>
+                            <i class="material-icons material-icons-5x">thumb_up</i>
                             <h3><?php echo $pos_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-green">
@@ -57,7 +54,7 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-border bg-color-red">
                         <div class="panel-body">
-                            <i class="fa fa-minus-square fa-5x"></i>
+                            <i class="material-icons material-icons-5x">thumb_down</i>
                             <h3><?php echo $neg_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-red">
@@ -69,7 +66,7 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-border bg-color-brown">
                         <div class="panel-body">
-                            <i class="fa fa-clone fa-5x"></i>
+                            <i class="material-icons material-icons-5x">pie_chart</i>
                             <h3><?php echo $total_testdata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-brown">
@@ -87,7 +84,6 @@
                 <button class="btn btn-lg btn-primary" id="trainbtn"><i class="fa fa-cogs"></i> Latih Sistem</button>
             </div>
 
-            <!-- <p class="text-muted text-center">Tidak ada hasil training yang tersedia. Silahkan tambahkan review ke dalam dataset anda</p> -->
             <!-- TABLE STARTS HERE-->
             <div id="divtabeltraining">
                 <!--TABLE CONTENTS ARE LOADED HERE -->
@@ -97,6 +93,10 @@
     <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>
 </div>
 
+<!-- SCRIPTS -->
+	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
+	
 <!-- DATA TABLE SCRIPTS -->
     <script src="<?=base_url()?>assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="<?=base_url()?>assets/js/dataTables/dataTables.bootstrap.js"></script>

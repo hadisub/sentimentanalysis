@@ -34,8 +34,8 @@ class Dataset extends CI_Controller
 				$key['kategori_review'],
 				//explode( "\n",$key['isi_review'])[0],
 				$key['isi_review'],
-				'<button data-target="#modaldataset" data-toggle="modal" class="btn btn-circle btn-default btn-edit" data-id="'.$key['id_review'].'"><i class="fa fa-pencil "></i></button>
-				<button a href="#deletereviewmodal" data-toggle="modal" data-id="'.$key['id_review'].'" class="btn btn-circle btn-danger btn-delete"><i class="fa fa-trash "></i></button>'
+				'<button data-target="#modaldataset" data-toggle="modal" class="btn btn-circle btn-default btn-edit" data-id="'.$key['id_review'].'"><i class="material-icons">edit</i></button>
+				<button a href="#deletereviewmodal" data-toggle="modal" data-id="'.$key['id_review'].'" class="btn btn-circle btn-danger btn-delete"><i class="material-icons">delete</i></button>'
 			];
 		}
 

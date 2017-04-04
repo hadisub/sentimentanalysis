@@ -28,7 +28,7 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('password','Password','trim|required|max_length[40]');
 		if ($this->form_validation->run() == FALSE){
            $this->session->set_flashdata('message','Input username atau password tidak valid!');
-           $this->session->set_flashdata('type','warning');
+           $this->session->set_flashdata('type','danger');
            redirect('/');
            }
         else

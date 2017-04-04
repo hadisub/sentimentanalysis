@@ -1,18 +1,15 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Sentiment Analysis</title>
 	<meta charset="utf-8" />
-  <meta name="url" content="<?=base_url()?>" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.css">
+	<meta name="url" content="<?=base_url()?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/font-awesome.css">
-  <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/toastr.css">
-
-  <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/material-icons.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/toastr.css">
 </head>
 <body>
 
@@ -35,7 +32,7 @@
 
             <!--BUTTON TAMBAH -->
             <div class="btn-fixed">            
-            <button a href="#modalkatadasar" data-toggle = "modal" class="btn btn-circle btn-circle-lg btn-primary btn-add text-right"><i class="fa fa-plus fa-2x"></i></button>   
+				<button a href="#modalkatadasar" data-toggle = "modal" class="btn btn-circle btn-circle-lg btn-primary btn-add text-right"><i class="material-icons material-icons-2x">playlist_add</i></button>   
             </div>
 				    <!--TABLE-->
 				     <!-- /. ROW  -->
@@ -43,24 +40,24 @@
 
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Kata</th>
-                                            <th>Tindakan</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!--End Advanced Tables -->
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="dataTables-example">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Kata</th>
+										<th>Tindakan</th>
+									</tr>
+								</thead>
+								
+							</table>
+						</div>
+						
+					</div>
                 </div>
+                    <!--End Advanced Tables -->
+            </div>
             </div>
 				<!-- END OF TABLE-->
 
@@ -98,7 +95,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-success">
-                <i class = "fa fa-save"></i>   Simpan</button>
+                <i class = "material-icons">save</i>   Simpan</button>
             </div>
           </div>
           </form>
@@ -122,14 +119,18 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-danger">
-                <i class = "fa fa-trash"></i>   Hapus</button>
+                <i class = "material-icons">delete</i>   Hapus</button>
             </div>
           </div>
           </form>
       </div>
     </div>
     <!--END OF MODAL FORM-->
-
+	
+	<!-- SCRIPTS -->
+	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
+	
     <!-- DATA TABLE SCRIPTS -->
     <script src="<?=base_url()?>assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="<?=base_url()?>assets/js/dataTables/dataTables.bootstrap.js"></script>

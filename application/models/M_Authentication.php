@@ -9,7 +9,7 @@ class M_Authentication extends CI_Model
 		if (count($user)>0){
 		$logindata = array(
         'id' => $user["id"],
-        'username'  => $user["username"],
+        'name'  => $user["nama"],
         'logged_in' => TRUE);
 
         $this->session->set_userdata($logindata);

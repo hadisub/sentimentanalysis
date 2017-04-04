@@ -60,16 +60,16 @@ if(isset($title)){
                 <a class="navbar-brand" href="#"><small>Sentiment Analysis</small></a>
             </div>
 
-            <ul class="nav navbar-top-links navbar-right">
+            <ul class="nav navbar-top-links navbar-right user-dropdown">
                 <!-- /.dropdown -->
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i><?php echo $this->session->userdata('username')?> <i class="fa fa-caret-down"></i>
+                        <i class="material-icons">perm_identity</i> <?php echo $this->session->userdata('name')?> <i class="material-icons">arrow_drop_down</i> 
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li class="divider"></li>
-                        <li><a href="<?=site_url()?>auth/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?=site_url()?>auth/logout"><i class="material-icons">input</i> Logout</a>
                         </li>
                     </ul>
                 <!-- /.dropdown -->
@@ -84,24 +84,24 @@ if(isset($title)){
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a class="<?=$dashboard_active?>" href="<?=site_url()?>dashboard"><i class="fa fa-dashboard"></i>Dashboard</a>
+                        <a class="<?=$dashboard_active?>" href="<?=site_url()?>dashboard"><i class="material-icons">laptop</i> Dashboard</a>
+                    </li>
+					<li>
+                        <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="material-icons">iso</i> Dataset</a>
                     </li>
                     <li>
-                        <a class="<?=$akurasi_active?>" href="<?=site_url()?>akurasi"><i class="fa fa-calculator"></i>Hitung Akurasi</a>
+                        <a class="<?=$akurasi_active?>" href="<?=site_url()?>akurasi"><i class="material-icons">pie_chart</i> Hitung Akurasi</a>
                     </li>
                     <li>
-                        <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="fa fa-tasks"></i> Dataset</a>
+                        <a class="<?=$katadasar_active?>" href="<?=site_url()?>katadasar"><i class="material-icons">question_answer</i> Kata Dasar</a>
                     </li>
                     <li>
-                        <a class="<?=$katadasar_active?>" href="<?=site_url()?>katadasar"><i class="fa fa-comments"></i> Kata Dasar</a>
-                    </li>
-                    <li>
-                        <a class="<?=$stopwords_active?>" href="<?=site_url()?>stopwords"><i class="fa fa-ban"></i> Stop Words</a>
+                        <a class="<?=$stopwords_active?>" href="<?=site_url()?>stopwords"><i class="material-icons">feedback</i> Stop Words</a>
                     </li>
                     
                     <li>
-                       <a href="#"><i class="fa fa-clipboard" ></i> Kumpulan Term<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                       <a href="#"><i class="material-icons">subject</i> Kumpulan Term<i class="material-icons arrow">arrow_drop_down</i></a>
+                        <ul aria-expanded="true" class="nav nav-second-level">
                             <li>
                                 <a class="<?=$termtokenized_active?>" href="<?=site_url()?>displayterm/displaytokenized">1. Setelah Tokenizing</a>
                             </li>
@@ -115,7 +115,7 @@ if(isset($title)){
                     </li>
                     
                     <li>
-                    <a href="#myModal" data-toggle="modal"><i class="fa fa-info-circle"></i> Tentang</a>
+                    <a href="#myModal" data-toggle="modal"><i class="material-icons">help</i> Tentang</a>
                     </li>
                 </ul>
 

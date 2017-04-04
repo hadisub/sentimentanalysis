@@ -28,8 +28,8 @@ class Katadasar extends CI_Controller
 			$allData[] = [
 				$no++,
 				$key['kata_katadasar'],
-				'<button data-target="#modalkatadasar" data-toggle="modal" class="btn btn-circle btn-default btn-edit" data-id="'.$key['id_katadasar'].'"><i class="fa fa-pencil "></i></button>
-				<button data-target="#deletekatadasarmodal" data-toggle="modal" data-id="'.$key['id_katadasar'].'" class="btn btn-circle btn-danger btn-delete"><i class="fa fa-trash "></i></button>'
+				'<button data-target="#modalkatadasar" data-toggle="modal" class="btn btn-circle btn-default btn-edit" data-id="'.$key['id_katadasar'].'"><i class="material-icons">edit</i></button>
+				<button data-target="#deletekatadasarmodal" data-toggle="modal" data-id="'.$key['id_katadasar'].'" class="btn btn-circle btn-danger btn-delete"><i class="material-icons">delete</i></button>'
 			];
 		}
 

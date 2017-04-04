@@ -29,8 +29,8 @@ class Stopwords extends CI_Controller
 			$allData[] = [
 				$no++,
 				$key['kata_stopwords'],
-				'<button data-target="#modalstopwords" data-toggle="modal" class="btn btn-circle btn-default btn-edit" data-id="'.$key['id_stopwords'].'"><i class="fa fa-pencil "></i></button>
-				<button data-target="#deletestopwordsmodal" data-toggle="modal" data-id="'.$key['id_stopwords'].'" class="btn btn-circle btn-danger btn-delete"><i class="fa fa-trash "></i></button>'
+				'<button data-target="#modalstopwords" data-toggle="modal" class="btn btn-circle btn-default btn-edit" data-id="'.$key['id_stopwords'].'"><i class="material-icons">edit</i></button>
+				<button data-target="#deletestopwordsmodal" data-toggle="modal" data-id="'.$key['id_stopwords'].'" class="btn btn-circle btn-danger btn-delete"><i class="material-icons">delete</i></button>'
 			];
 		}
 

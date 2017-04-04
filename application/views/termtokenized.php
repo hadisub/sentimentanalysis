@@ -1,17 +1,14 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Sentiment Analysis</title>
 	<meta charset="utf-8" />
-  <meta name="url" content="<?=base_url()?>" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.css">
+	<meta name="url" content="<?=base_url()?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/font-awesome.css">
-
-  	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/material-icons.css">
 </head>
 <body>
 
@@ -54,6 +51,9 @@
     </div>
 </div>
 
+<!-- SCRIPTS -->
+	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
 <!-- DATA TABLE SCRIPTS -->
     <script src="<?=base_url()?>assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="<?=base_url()?>assets/js/dataTables/dataTables.bootstrap.js"></script>

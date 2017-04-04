@@ -1,5 +1,3 @@
-
-
 <!--TABEL DATA UJI -->
 <div class="row">
     <div class="col-md-12">
