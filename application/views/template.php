@@ -1,6 +1,7 @@
 <?php
 
 $dashboard_active = "";
+$train_active = "";
 $akurasi_active = "";
 $dataset_active = "";
 $katadasar_active = "";
@@ -14,7 +15,11 @@ if(isset($title)){
         case 'dashboard':
             $dashboard_active = "active-menu";
             break;
-
+		
+		case 'train':
+            $train_active = "active-menu";
+            break;
+		
         case 'akurasi':
             $akurasi_active = "active-menu";
             break;
@@ -87,10 +92,13 @@ if(isset($title)){
                         <a class="<?=$dashboard_active?>" href="<?=site_url()?>dashboard"><i class="material-icons">laptop</i> Dashboard</a>
                     </li>
 					<li>
-                        <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="material-icons">iso</i> Dataset</a>
+                        <a class="<?=$train_active?>" href="<?=site_url()?>train"><i class="material-icons">playlist_play</i> Latih Sistem</a>
                     </li>
                     <li>
                         <a class="<?=$akurasi_active?>" href="<?=site_url()?>akurasi"><i class="material-icons">pie_chart</i> Hitung Akurasi</a>
+                    </li>
+					<li>
+                        <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="material-icons">storage</i> Dataset</a>
                     </li>
                     <li>
                         <a class="<?=$katadasar_active?>" href="<?=site_url()?>katadasar"><i class="material-icons">question_answer</i> Kata Dasar</a>
@@ -100,7 +108,7 @@ if(isset($title)){
                     </li>
                     
                     <li>
-                       <a href="#"><i class="material-icons">subject</i> Kumpulan Term<i class="material-icons arrow">arrow_drop_down</i></a>
+                       <a href="#"><i class="material-icons">chat</i> Kumpulan Term<i class="material-icons arrow">arrow_drop_down</i></a>
                         <ul aria-expanded="true" class="nav nav-second-level">
                             <li>
                                 <a class="<?=$termtokenized_active?>" href="<?=site_url()?>displayterm/displaytokenized">1. Setelah Tokenizing</a>

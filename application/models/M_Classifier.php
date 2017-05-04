@@ -149,28 +149,17 @@ class M_Classifier extends CI_Model{
 		return $array_occ;
 	}
 
-	/*----INSERT TERM KE DATABASE----*/
+	/*----INSERT JUMLAH KEMUNCULAN TERM KE DATABASE----*/
 	public function insert_term(){
 		$this->db->truncate('sa_term');
 		$data = $this->array_term_occ();
 		$this->db->insert_batch('sa_term',$data);	
-		}
-
-	public function testingku(){
-		$arrayku = array();
-		
-		$this->db->select('term_stemmed');
-		$this->db->from('sa_bagofwords');
-		$this->db->join('sa_review', 'sa_review.id_review = sa_bagofwords.id_review');
-		$this->db->where('sa_review.judul_review','District 9');
-		$arrayku = $this->db->get()->result_array();
-		$arrayku = array_column($arrayku,'term_stemmed');
-		$alldata = implode(" ",$arrayku);
-		$alldata = preg_replace('/\s+/', ' ', $alldata);
-		$alldata = trim($alldata);
-		$arrayku = explode(" ",$alldata);
-		return $arrayku;
 	}
+	
+	/*----PROSES KLASIFIKASI NAIVE BAYES----*/
+	public function naive_bayes($array_kata){
 
+	}
+	
 }
 ?>

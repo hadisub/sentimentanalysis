@@ -89,10 +89,6 @@ body{
 	outline:0;
 }
 
-.dataTables_filter{
-    text-align: right;
-}
-
 .copyright{
 	color: #fff;
 }
@@ -552,6 +548,15 @@ ul.nav.nav-second-level.collapse.in {
     margin-top: 40%;
 }
 
+/*DATATABLES*/
+#divtabeltraining{
+    z-index:1;
+}
+
+.dataTables_filter{
+	text-align: right;
+}
+
 /*TABEL TEST */
 
 .bg-green{
@@ -575,4 +580,41 @@ ul.nav.nav-second-level.collapse.in {
 /*TOASTR */
 #toast-container > div {
     opacity: 1;
+}
+
+/*LOADING ANIMATION*/
+
+.loader {
+	width: 40px;
+	height: 40px;
+	background-color: #225081;
+	margin: 40px auto;
+	-webkit-animation: loader 1.2s infinite ease-in-out;
+	animation: loader 1.2s infinite ease-in-out;
+	display: none;
+	z-index: 9999;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } 
+}
+
+@keyframes loader {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } 
 }

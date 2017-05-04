@@ -11,7 +11,6 @@
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/material-icons.css">
 </head>
 <body>
-
 <div id="wrapper">
 	<?php $this->load->view('template');?>	
 
@@ -66,7 +65,7 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-border bg-color-brown">
                         <div class="panel-body">
-                            <i class="material-icons material-icons-5x">pie_chart</i>
+                            <i class="material-icons material-icons-5x">library_books</i>
                             <h3><?php echo $total_testdata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-brown">
@@ -77,18 +76,7 @@
 
             </div>
             <!-- END OF CARDS -->
-
-            <p><?php print_r($testing);?></p>
-            <!-- BUTTON TRAIN DATA-->
-            <div class="text-right">
-                <button class="btn btn-lg btn-primary" id="trainbtn"><i class="fa fa-cogs"></i> Latih Sistem</button>
-            </div>
-
-            <!-- TABLE STARTS HERE-->
-            <div id="divtabeltraining">
-                <!--TABLE CONTENTS ARE LOADED HERE -->
-            </div>
-            <!--TABLE ENDS HERE -->      
+               
     </div>
     <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>
 </div>
