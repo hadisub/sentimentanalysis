@@ -33,7 +33,6 @@
 				
             <!-- TABLE STARTS HERE-->
             <div id="divtabeltraining">
-            
 			<!--TABLE CONTENTS ARE LOADED HERE -->
             </div>
             <!--TABLE ENDS HERE -->   

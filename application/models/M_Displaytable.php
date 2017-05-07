@@ -23,13 +23,11 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytabeltrain($start, $length, $search_query){
-		//count all matching term
 		$this->db->like('term', $search_query);
 		$this->db->from('sa_term');
 		$this->db->order_by('term','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching reviews per page
 		$this->db->like('term', $search_query);
 		$this->db->from('sa_term');
 		$this->db->order_by('term','ASC');
@@ -44,17 +42,17 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytabeltest($start, $length, $search_query){
-		//count all matching reviews
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->where('kategori_review','DATA UJI');
+		$this->db->join('sa_datauji', 'sa_datauji.id_review = sa_review.id_review');
 		$this->db->order_by('judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching reviews per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->where('kategori_review','DATA UJI');
+		$this->db->join('sa_datauji', 'sa_datauji.id_review = sa_review.id_review');
 		$this->db->order_by('judul_review','ASC');
 		$this->db->limit($length, $start);
 		$data = $this->db->get()->result_array();
@@ -67,13 +65,11 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaydataset($start, $length, $search_query){
-		//count all matching stopwords
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->order_by('judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching stopwords per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->order_by('judul_review','ASC');
@@ -88,13 +84,11 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaykatadasar($start, $length, $search_query){
-		//count all matching katadasar
 		$this->db->like('kata_katadasar', $search_query);
 		$this->db->from('sa_katadasar');
 		$this->db->order_by('kata_katadasar','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching katadasar per page
 		$this->db->like('kata_katadasar', $search_query);
 		$this->db->from('sa_katadasar');
 		$this->db->order_by('kata_katadasar','ASC');
@@ -109,13 +103,11 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaystopwords($start, $length, $search_query){
-	//count all matching stopwords
 		$this->db->like('kata_stopwords', $search_query);
 		$this->db->from('sa_stopwords');
 		$this->db->order_by('kata_stopwords','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching stopwords per page
 		$this->db->like('kata_stopwords', $search_query);
 		$this->db->from('sa_stopwords');
 		$this->db->order_by('kata_stopwords','ASC');
@@ -130,14 +122,12 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytermtokenized($start, $length, $search_query){
-	//count all matching review
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching review per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
@@ -153,14 +143,12 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytermfiltered($start, $length, $search_query){
-	//count all matching review
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching review per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
@@ -176,14 +164,12 @@ class M_Displaytable extends CI_Model
 	}
 
 	public function displaytermstemmed($start, $length, $search_query){
-	//count all matching review
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$this->db->order_by('sa_review.judul_review','ASC');
 		$totalfilter = $this->db->count_all_results();
 
-		//limit matching review per page
 		$this->db->like('judul_review', $search_query);
 		$this->db->from('sa_review');
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');

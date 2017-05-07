@@ -118,7 +118,7 @@ body{
 }
 
 .no-border {
-    border:1px solid #f3f3f3;
+    border:0px;
 }
 
 h1, .h1, h2, .h2, h3, .h3 {

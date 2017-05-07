@@ -30,15 +30,6 @@ class M_Classifier extends CI_Model{
 		return $total_neg_traindata;
 	}
 
-	//hitung total data uji
-	public function count_testdata(){
-		$this->db->select('id_review');
-		$this->db->from('sa_review');
-		$this->db->where('kategori_review','DATA UJI');
-		$total_testdata = $this->db->count_all_results();
-		return $total_testdata;
-	}
-
 	//ambil semua term dari semua data latih
 	public function array_terms(){
 		$this->db->select('term_stemmed');
@@ -149,16 +140,91 @@ class M_Classifier extends CI_Model{
 		return $array_occ;
 	}
 
-	/*----INSERT JUMLAH KEMUNCULAN TERM KE DATABASE----*/
+	//insert jumlah kemunculan term ke database
 	public function insert_term(){
 		$this->db->truncate('sa_term');
 		$data = $this->array_term_occ();
 		$this->db->insert_batch('sa_term',$data);	
 	}
 	
-	/*----PROSES KLASIFIKASI NAIVE BAYES----*/
-	public function naive_bayes($array_kata){
+	/*----PROSES TESTING NAIVE BAYES----*/
+		
+	//ambil seluruh term di tabel review yang kategorinya data uji
+	public function all_terms_testdata(){
+		$this->db->select('sa_review.id_review, sa_bagofwords.term_stemmed');
+		$this->db->from('sa_review');
+		$this->db->where('kategori_review','DATA UJI');
+		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
+		$array_all_term = $this->db->get()->result_array();
+		return $array_all_term;
+	}
+	
+	//ambil seluruh term dari textarea untuk visitor
+	public function visitor_terms(){
+		
+	}
+	
+	//ambil id dari data uji
+	public function array_id_testdata(){
+		$this->db->select('id_review');
+		$this->db->from('sa_review');
+		$this->db->where('kategori_review','DATA UJI');
+		$array_id_testdata = $this->db->get()->result_array();
+		$array_id_testdata = array_column($array_id_testdata,'id_review');
+		return $array_id_testdata;
+	}
+	
+	//prior probability kelas positif
+	public function pos_prior_prob(){
+		$total_traindata = $this->count_total_traindata();
+		$pos_traindata = $this->count_pos_traindata();
+		
+		//prior prob positif = jumlah data latih positif/jumlah semua data latih
+		$pos_prior = $pos_traindata/$total_traindata;
+		return $pos_prior;
+	}
+	
+	//prior probability kelas negatif
+	public function neg_prior_prob(){
+		$total_traindata = $this->count_total_traindata();
+		$neg_traindata = $this->count_neg_traindata();
+		
+		//prior prob negatif = jumlah data latih negatif/jumlah semua data latih
+		$neg_prior = $neg_traindata/$total_traindata;
+		return $neg_prior;
+	}
+	
+	//proses perhitungan naive bayes
+	public function naive_bayes(){
+		$vocab_count = count($this->vocabulary()); //jumlah vocabulary (unique terms)
+		$array_testdata = $this->all_terms_testdata(); //ambil seluruh term di data uji
+		$array_id_testdata = $this->array_id_testdata(); //ambil seluruh id review data uji
+		$total_pos_terms = count($this->array_pos_terms()); //jumlah seluruh term di kelas positif
+		$total_neg_terms = count($this->array_neg_terms()); //jumlah seluruh term di kelas negatif
+		$pos_prior_prob = $this->pos_prior_prob(); //prior probability kelas positif
+		$neg_prior_prob = $this->neg_prior_prob(); //prior probability kelas negatif
+		
+		//loop semua dokumen di data uji
+		/*foreach(){
+			
+		}*/
+		return $array_id_testdata;
+	}
+	
+	//tentukan kelas terbaik
+	public function best_class($positive,$negative){
 
+	}
+	
+	//isi badge di tabel
+	public function accuracy_badge($predicted,$result){
+		$badge="";
+		if($predicted==$result){
+			$badge="<span class='badge bg-green'>AKURAT</span>";
+		}else{
+			$badge="<span class='badge bg-red'>TIDAK AKURAT</span>";
+		}
+		return $badge;
 	}
 	
 }

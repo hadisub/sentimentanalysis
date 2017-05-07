@@ -26,9 +26,8 @@ class Akurasi extends CI_Controller{
 				$no++,
 				$key['judul_review'],
 				$key['sentimen_review'],
-				'-',
-				'-',
-				'-',
+				$key['prob_pos_datauji'],
+				$key['prob_neg_datauji'],
 				'<span class="badge bg-green">AKURAT</span>'
 			];
 		}
