@@ -27,13 +27,10 @@
             <div class="text-right">
                 <button class="btn btn-lg btn-primary" id="trainbtn"><i class="material-icons material-icons-1-5x">playlist_play</i> Latih Sistem</button>
             </div>
-			
-			<!--LOADING IMAGE-->
-			<div class="loader" id="loader"></div>
 				
             <!-- TABLE STARTS HERE-->
             <div id="divtabeltraining">
-			<!--TABLE CONTENTS ARE LOADED HERE -->
+				<!--TABLE CONTENTS ARE LOADED HERE -->
             </div>
             <!--TABLE ENDS HERE -->   
 		</div>

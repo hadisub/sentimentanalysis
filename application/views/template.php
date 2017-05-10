@@ -144,7 +144,7 @@ if(isset($title)){
                         <div class="modal-body text-center">
                              versi p.1 (prototype)
                             <br>
-                            Copyright &copy 2016 Sentiment Analysis
+                            Copyright &copy 2017 Sentiment Analysis
                             <br>
                             All rights reserved
                         </div>

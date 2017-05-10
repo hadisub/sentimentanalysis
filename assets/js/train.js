@@ -22,23 +22,21 @@ $(document).ready(function () {
 		}); 
 	
 	$('#trainbtn').click(function(){
-		$("#divtabeltraining").hide();
-		$("#loader").show();
+		$('#divtabeltraining').html('');
+		$('#divtabeltraining').addClass('loader');
 		//INSERT TERM OCCURENCES
 		$.ajax({
 			url: url + "train/insert_term_occ",
-			cache: false,
 			success: function(){
-                $("#loader").hide();
+                $('#divtabeltraining').removeClass('loader');
             },
 			error: function(){
-                $("#loader").hide();
+                 $('#divtabeltraining').removeClass('loader');
             }
 		});
  		$('#divtabeltraining').load(url+'train/displaytabeltrain', function(){
 			//LOAD DATATABLES
 			loadtabel();
-			$("#divtabeltraining").show();
 		});  
 	});
 });

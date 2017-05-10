@@ -26,9 +26,6 @@
             <div class="text-right">
                 <button class="btn btn-lg btn-primary" id="akurasibtn"><i class="material-icons material-icons-1-5x">data_usage</i> Hitung Akurasi</button>
             </div>
-
-            <!--LOADING IMAGE-->
-            <div class="loader" id="loader"></div>
             
             <!-- TABLE STARTS HERE-->
             <div id="divtabeltest">

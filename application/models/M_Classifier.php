@@ -79,7 +79,16 @@ class M_Classifier extends CI_Model{
 	}
 
 	/*----PROSES TRAINING----*/
-
+	
+	//hitung total review di data uji
+	public function count_total_testdata(){
+		$this->db->select('id_review');
+		$this->db->from('sa_review');
+		$this->db->where('kategori_review','DATA UJI');
+		$total_testdata = $this->db->count_all_results();
+		return $total_testdata;
+	}
+	
 	//ambil array semua term yang unik dari semua data latih (vocabulary)
 	public function vocabulary(){
 		$array_terms = $this->array_terms();
@@ -148,8 +157,8 @@ class M_Classifier extends CI_Model{
 	}
 	
 	/*----PROSES TESTING NAIVE BAYES----*/
-		
-	//ambil seluruh term di tabel review yang kategorinya data uji
+	
+	//ambil seluruh term di tabel review yang kategorinya data uji (untuk ADMIN)
 	public function all_terms_testdata(){
 		$this->db->select('sa_review.id_review, sa_bagofwords.term_stemmed');
 		$this->db->from('sa_review');
@@ -159,19 +168,41 @@ class M_Classifier extends CI_Model{
 		return $array_all_term;
 	}
 	
-	//ambil seluruh term dari textarea untuk visitor
-	public function visitor_terms(){
+	//ambil seluruh term dari textarea (untuk VISITOR)
+	public function all_terms_visitor(){
 		
 	}
 	
-	//ambil id dari data uji
-	public function array_id_testdata(){
-		$this->db->select('id_review');
-		$this->db->from('sa_review');
-		$this->db->where('kategori_review','DATA UJI');
-		$array_id_testdata = $this->db->get()->result_array();
-		$array_id_testdata = array_column($array_id_testdata,'id_review');
-		return $array_id_testdata;
+	public function get_role(){
+		$role="";
+		if($this->session->userdata('logged_in')){
+			$role="admin";
+		}else{
+			$role="visitor";
+		}
+		return $role;
+	}
+	
+	public function get_test_terms($role){
+		$array_terms = array();
+		switch ($role) {
+			case 'admin':
+            $array_terms = $this->all_terms_testdata();
+            break;
+			
+			case 'visitor':
+            $array_terms = $this->all_terms_visitor();
+            break;
+		}
+		return $array_terms;
+	}
+	
+	//ambil pos dan neg occurences di tabel term
+	public function array_occ_db(){
+		$this->db->select('term,pos_occ,neg_occ');
+		$this->db->from('sa_term');
+		$array_occ_db = $this->db->get()->result_array();
+		return $array_occ_db;
 	}
 	
 	//prior probability kelas positif
@@ -196,35 +227,112 @@ class M_Classifier extends CI_Model{
 	
 	//proses perhitungan naive bayes
 	public function naive_bayes(){
+		$role = $this->get_role();
 		$vocab_count = count($this->vocabulary()); //jumlah vocabulary (unique terms)
-		$array_testdata = $this->all_terms_testdata(); //ambil seluruh term di data uji
-		$array_id_testdata = $this->array_id_testdata(); //ambil seluruh id review data uji
+		$array_testdata = $this->get_test_terms($role); //ambil seluruh term di data uji / textarea visitor (tergantung role)
 		$total_pos_terms = count($this->array_pos_terms()); //jumlah seluruh term di kelas positif
 		$total_neg_terms = count($this->array_neg_terms()); //jumlah seluruh term di kelas negatif
-		$pos_prior_prob = $this->pos_prior_prob(); //prior probability kelas positif
-		$neg_prior_prob = $this->neg_prior_prob(); //prior probability kelas negatif
+		$array_occ_db = $this->array_occ_db(); //ambil kemunculan kata
+		$pos_prior_prob = log($this->pos_prior_prob()); //prior probability kelas positif
+		$neg_prior_prob = log($this->neg_prior_prob()); //prior probability kelas negatif
+		$array_results = array();
 		
 		//loop semua dokumen di data uji
-		/*foreach(){
+		foreach($array_testdata as $test_data){
+			$id = $test_data["id_review"];
+			$terms_in_doc = explode(" ", $test_data["term_stemmed"]);
 			
-		}*/
-		return $array_id_testdata;
+			$pos_post_prob = 0;
+			$neg_post_prob = 0;
+			
+			//loop semua term di dalam dokumen di data uji
+			foreach($terms_in_doc as $term){
+				$pos_occ_in_class = 0;
+				$neg_occ_in_class = 0;
+				for($i=0; $i < count($array_occ_db);$i++){
+					if($array_occ_db[$i]["term"] == $term){
+					$pos_occ_in_class = $array_occ_db[$i]["pos_occ"];
+					$neg_occ_in_class = $array_occ_db[$i]["neg_occ"];
+					break;
+					}
+				}
+				
+				/*---posterior probability kelas C = jumlah kemunculan kata x di semua dokumen di kategori C  + 1)
+				/(jumlah semua kata di kategori C + jumlah semua unique words/vocabulary di semua kategori di data latih---*/
+				$pos_post_prob += log(($pos_occ_in_class+1)/($total_pos_terms+$vocab_count)); //posterior probability dokumen C di kelas positif
+				$neg_post_prob += log(($neg_occ_in_class+1)/($total_neg_terms+$vocab_count)); //posterior probability dokumen C di kelas negatif
+			}
+			
+			//P kelas positif dokumen C = P kelas positif (prior probability)* posterior probability
+			$pos_prob_datauji = $pos_prior_prob+$pos_post_prob;
+			
+			//P kelas negatif dokumen C = P kelas negatif (prior probability)* posterior probability
+			$neg_prob_datauji = $neg_prior_prob+$neg_post_prob;
+			
+			//ambil kelas terbaik (which one of 2 classes is higher in probability)
+			$best_class= $this->best_class($pos_prob_datauji,$neg_prob_datauji);
+			
+			//masukkan hasil perhitungan ke dalam array data uji
+			$array_results[] = array("id_review"=>$id,"prob_pos_datauji"=>$pos_prob_datauji,
+			"prob_neg_datauji"=>$neg_prob_datauji,"sentimen_datauji"=>$best_class); 
+		}
+		
+		return $array_results;
 	}
 	
 	//tentukan kelas terbaik
 	public function best_class($positive,$negative){
-
+		$best_class = "POSITIF";
+		if($positive<$negative){
+			$best_class = "NEGATIF";
+		}
+		return $best_class;
 	}
 	
 	//isi badge di tabel
 	public function accuracy_badge($predicted,$result){
-		$badge="";
-		if($predicted==$result){
-			$badge="<span class='badge bg-green'>AKURAT</span>";
-		}else{
-			$badge="<span class='badge bg-red'>TIDAK AKURAT</span>";
+		$badge="<span class='badge bg-gray'>BLM DIKETAHUI</span>";
+		if(isset($result)){
+			if($predicted==$result){
+				$badge="<span class='badge bg-green'>AKURAT</span>";
+			}else{
+				$badge="<span class='badge bg-red'>TDK AKURAT</span>";
+			}
 		}
 		return $badge;
+	}
+	
+	public function insert_datauji(){
+		$this->db->truncate('sa_datauji');
+		$data = $this->naive_bayes();
+		$this->db->insert_batch('sa_datauji',$data);
+	}
+	
+	//ambil sentimen awal dan hasil analisis
+	public function get_sentiments(){
+		$this->db->select('sa_review.sentimen_review, sa_datauji.sentimen_datauji');
+		$this->db->from('sa_review');
+		$this->db->where('kategori_review','DATA UJI');
+		$this->db->join('sa_datauji', 'sa_datauji.id_review = sa_review.id_review');
+		$array_all_sentiments = $this->db->get()->result_array();
+	}
+	
+	//hitung prediksi Benar/total Prediksi
+	public function count_akurasi(){
+		$true_prediction =0;
+		$percentage = 0;
+		$total = $this->count_total_testdata();
+		$array_sentiments = $this->get_sentiments();
+		
+		$percentage = ($true_prediction/$total)*100;
+		return $percentage;
+	}
+	
+	public function matriks_akurasi(){
+		$array_data_matriks= array();
+		$akurasi = $this->count_akurasi();
+		$array_data_matriks[] = array("akurasi"=>$akurasi);
+		return $array_data_matriks;
 	}
 	
 }

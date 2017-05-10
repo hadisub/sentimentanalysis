@@ -16,29 +16,27 @@ function loadtabel(){
 }
 
 $(document).ready(function () {
-  $('#divtabeltest').load(url+'akurasi/displaytabeltest', function(){
+	$('#divtabeltest').load(url+'akurasi/displaytabeltest', function(){
     //LOAD DATATABLES
     loadtabel();
     }); 
   
   $('#akurasibtn').click(function(){
-    $("#divtabeltest").hide();
-    $("#loader").show();
-    //INSERT TERM OCCURENCES
-    // $.ajax({
-    //   url: url + "train/insert_term_occ",
-    //   cache: false,
-    //   success: function(){
-    //             $("#loader").hide();
-    //         },
-    //   error: function(){
-    //             $("#loader").hide();
-    //         }
-    // });
+    $('#divtabeltest').html('');
+    $('#divtabeltest').addClass('loader');
+	//INSERT HASIL PERHITUNGAN DATA UJI
+    $.ajax({
+       url: url + "akurasi/insert_datauji",
+       success: function(){
+                $('#divtabeltest').removeClass('loader');
+             },
+       error: function(){
+                $('#divtabeltest').removeClass('loader');
+             }
+    });
     $('#divtabeltest').load(url+'akurasi/displaytabeltest', function(){
       //LOAD DATATABLES
       loadtabel();
-      $("#divtabeltest").show();
     });  
   });
 });

@@ -21,4 +21,19 @@
         </div>
     </div>
     <!--End Advanced Tables -->
+	<div class="col-md-12" id="confusion-matrix">
+		<div class="alert alert-info">
+			<table class="borderless">
+				<th width="400"><strong>Akurasi Klasifikasi (Prediksi Benar/Total Prediksi)</strong></th>
+				<th width="20">:</th>
+				<!--<th><?php echo $array_data_matrix["akurasi"];?>%</th>-->
+			</table>
+		</div>
+		<div class="alert alert-info">
+			<strong>Confusion Matrix Kelas Positif</strong>
+		</div>
+		<div class="alert alert-info">
+			<strong>Confusion Matrix Kelas Negatif</strong>
+		</div>
+	</div>
 </div>
