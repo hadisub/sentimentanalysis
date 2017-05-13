@@ -26,7 +26,7 @@
 			<table class="borderless">
 				<th width="400"><strong>Akurasi Klasifikasi (Prediksi Benar/Total Prediksi)</strong></th>
 				<th width="20">:</th>
-				<!--<th><?php echo $array_data_matrix["akurasi"];?>%</th>-->
+				<th><span id="akurasi-percentage"></span></th>
 			</table>
 		</div>
 		<div class="alert alert-info">

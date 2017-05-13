@@ -15,10 +15,30 @@ function loadtabel(){
   });
 }
 
+function loadmatrix(){
+	$.ajax({
+		url: url + "akurasi/matrix_akurasi",
+		dataType: "json",
+		success: function(data){
+			$data = JSON.stringify(data);
+			print_matrix_contents(data);
+			console.log(data);
+		},
+		error: function(){
+			alert("Tidak dapat mengambil matriks");
+		}
+	});
+}
+
+function print_matrix_contents(matrix){
+	document.getElementById("akurasi-percentage").innerHTML = matrix;
+}
+
 $(document).ready(function () {
 	$('#divtabeltest').load(url+'akurasi/displaytabeltest', function(){
     //LOAD DATATABLES
     loadtabel();
+	loadmatrix();
     }); 
   
   $('#akurasibtn').click(function(){
@@ -28,7 +48,8 @@ $(document).ready(function () {
     $.ajax({
        url: url + "akurasi/insert_datauji",
        success: function(){
-                $('#divtabeltest').removeClass('loader');
+				loadmatrix();
+				$('#divtabeltest').removeClass('loader');
              },
        error: function(){
                 $('#divtabeltest').removeClass('loader');

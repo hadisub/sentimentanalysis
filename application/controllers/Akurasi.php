@@ -51,9 +51,9 @@ class Akurasi extends CI_Controller{
 		$this->load->view('tabeltest');
 	}
 	
-	public function matriks_akurasi(){
-		$array_data_matriks = $this->m_classifier->matriks_akurasi();
-		return $array_data_matriks;
+	public function matrix_akurasi(){
+		$array_data_matrix = $this->m_classifier->matrix_akurasi();
+		echo json_encode($array_data_matrix);
 	}
 }
 ?>

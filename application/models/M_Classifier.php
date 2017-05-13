@@ -315,24 +315,13 @@ class M_Classifier extends CI_Model{
 		$this->db->where('kategori_review','DATA UJI');
 		$this->db->join('sa_datauji', 'sa_datauji.id_review = sa_review.id_review');
 		$array_all_sentiments = $this->db->get()->result_array();
+		return $array_all_sentiments;
 	}
 	
-	//hitung prediksi Benar/total Prediksi
-	public function count_akurasi(){
-		$true_prediction =0;
-		$percentage = 0;
-		$total = $this->count_total_testdata();
-		$array_sentiments = $this->get_sentiments();
-		
-		$percentage = ($true_prediction/$total)*100;
-		return $percentage;
-	}
-	
-	public function matriks_akurasi(){
+	public function matrix_akurasi(){
 		$array_data_matriks= array();
-		$akurasi = $this->count_akurasi();
-		$array_data_matriks[] = array("akurasi"=>$akurasi);
-		return $array_data_matriks;
+		$akurasi = $this->get_sentiments();
+		return $akurasi;
 	}
 	
 }
