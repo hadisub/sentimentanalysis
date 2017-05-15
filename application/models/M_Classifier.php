@@ -319,9 +319,34 @@ class M_Classifier extends CI_Model{
 	}
 	
 	public function matrix_akurasi(){
-		$array_data_matriks= array();
-		$akurasi = $this->get_sentiments();
-		return $akurasi;
+		$array_sentiments = $this->get_sentiments();
+		$total_datauji =  count($array_sentiments);
+		$true_positives =0;
+		$true_negatives =0;
+		$false_positives =0;
+		$false_negatives =0;
+		
+		foreach($array_sentiments as $sentiment){
+			if($sentiment["sentimen_review"]=="POSITIF" && $sentiment["sentimen_datauji"]=="POSITIF"){
+				$true_positives = $true_positives+1;
+			}
+			else if($sentiment["sentimen_review"]=="NEGATIF" && $sentiment["sentimen_datauji"]=="NEGATIF"){
+				$true_negatives = $true_negatives+1;
+			}
+			else if($sentiment["sentimen_review"]=="POSITIF" && $sentiment["sentimen_datauji"]=="NEGATIF"){
+				$false_positives = $false_positives+1;
+			}
+			else if($sentiment["sentimen_review"]=="NEGATIF" && $sentiment["sentimen_datauji"]=="POSITIF"){
+				$false_negatives = $false_negatives+1;
+			}
+		}
+		
+		$akurasi = ($true_positives+$true_negatives)/$total_datauji; //AKURASI :(true positives+true negatives)/total data uji
+		$error_rate = 1- $akurasi; //ERROR-RATE : 1 - akurasi (tingkat kesalahan sistem)
+		$presisi = $true_positives/($true_positives+$false_positives); //PRESISI :true positives/(true positives+false positives)
+		$recall = $true_positives/($true_positives+$false_negatives); //RECALL: true positives/(true positives+false negatives)
+		$array_data_matriks = array($total_datauji, $true_positives, $true_negatives, $false_positives, $false_negatives, $akurasi, $error_rate, $presisi, $recall);
+		return $array_data_matriks;
 	}
 	
 }

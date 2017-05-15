@@ -17,7 +17,6 @@ class Visitor extends CI_Controller
 		$data['total_traindata'] = $this->m_classifier->count_total_traindata();
 		$data['pos_traindata'] = $this->m_classifier->count_pos_traindata();
 		$data['neg_traindata'] = $this->m_classifier->count_neg_traindata();
-		$data['testing'] = $this->m_classifier->matriks_akurasi();
 		$this->load->view('visitor',$data);
 	}
 }

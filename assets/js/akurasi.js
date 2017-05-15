@@ -20,9 +20,12 @@ function loadmatrix(){
 		url: url + "akurasi/matrix_akurasi",
 		dataType: "json",
 		success: function(data){
-			$data = JSON.stringify(data);
-			print_matrix_contents(data);
-			console.log(data);
+			//print_matrix_contents(data);
+			var arr = [];
+			for(var i in data){
+				arr.push(data[i]);
+			}
+			print_matrix_contents(arr);
 		},
 		error: function(){
 			alert("Tidak dapat mengambil matriks");
@@ -31,7 +34,16 @@ function loadmatrix(){
 }
 
 function print_matrix_contents(matrix){
-	document.getElementById("akurasi-percentage").innerHTML = matrix;
+	$("#total-datauji").append(matrix[0]); //total data uji
+	$("#true-positives").append(matrix[1]); //true positives
+	$("#true-negatives").append(matrix[2]); //true negatives
+	$("#false-positives").append(matrix[3]); //false positives
+	$("#false-negatives").append(matrix[4]); //false negatives
+	$("#akurasi-percentage").append(matrix[5]); //akurasi
+	$("#error-rate").append(matrix[6]); //error rate
+	$("#presisi").append(matrix[7]); //presisi
+	$("#recall").append(matrix[8]); //error rate
+	
 }
 
 $(document).ready(function () {
