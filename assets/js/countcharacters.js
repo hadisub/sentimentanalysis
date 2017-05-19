@@ -30,3 +30,14 @@ function count_stopwords(stopw){
 		document.getElementById('countstopwordschar').style.color = 'grey';
 	}
 }
+
+function count_visitor_review(review){
+	var counter = review.value.length;
+	document.getElementById('count-visitor-review').innerHTML = counter;
+	if(counter>7500){
+		document.getElementById('count-visitor-review').style.color = 'red';
+	}
+	else{
+		document.getElementById('count-visitor-review').style.color = 'grey';
+	}
+}

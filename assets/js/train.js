@@ -4,7 +4,7 @@ function loadtabel(){
 	$('#dataTables-example').dataTable({
 		"language": {
 		"info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-		"sLengthMenu": "_MENU_  term per halaman",
+		"sLengthMenu": "_MENU_  review per halaman",
 		"sSearch": "Cari: ",
 		"sNext": "Selanjutnya",
 		"sPrevious": "Sebelumnya"

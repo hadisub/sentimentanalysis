@@ -22,11 +22,11 @@
                     <h2 class="page-header">Latih Sistem</h2>
                 </div>
             </div>
-
-            <!-- BUTTON TRAIN DATA-->
-            <div class="text-right">
-                <button class="btn btn-lg btn-primary" id="trainbtn"><i class="material-icons material-icons-1-5x">playlist_play</i> Latih Sistem</button>
-            </div>
+			
+			<!--BUTTON TRAIN DATA -->
+			<div class="btn-fixed">            
+				<button class="btn btn-primary btn-lg" id="trainbtn"><i class="material-icons material-icons-1-5x">playlist_play</i> Latih</button>  
+			</div>
 				
             <!-- TABLE STARTS HERE-->
             <div id="divtabeltraining">

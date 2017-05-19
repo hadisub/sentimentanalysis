@@ -4,7 +4,7 @@ function loadtabel(){
   $('#dataTables-example').dataTable({
     "language": {
     "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-    "sLengthMenu": "_MENU_  term per halaman",
+    "sLengthMenu": "_MENU_  review per halaman",
     "sSearch": "Cari: ",
     "sNext": "Selanjutnya",
     "sPrevious": "Sebelumnya"
@@ -39,10 +39,12 @@ function print_matrix_contents(matrix){
 	$("#true-negatives").append(matrix[2]); //true negatives
 	$("#false-positives").append(matrix[3]); //false positives
 	$("#false-negatives").append(matrix[4]); //false negatives
-	$("#akurasi-percentage").append(matrix[5]); //akurasi
+	$("#akurasi").append(matrix[5]); //akurasi
 	$("#error-rate").append(matrix[6]); //error rate
 	$("#presisi").append(matrix[7]); //presisi
 	$("#recall").append(matrix[8]); //error rate
+	
+	$("#akurasi-percentage").append((matrix[5]*100).toFixed(2)); //error rate
 	
 }
 

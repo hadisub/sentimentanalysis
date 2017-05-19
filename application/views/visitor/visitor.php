@@ -5,6 +5,7 @@
     <title>Sentiment Analysis</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="url" content="<?=base_url()?>" />
 	<link rel="shortcut icon" href="<?=base_url()?>assets/img/sa.ico" type="image/x-icon" />
     <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/material-icons.css">
@@ -90,13 +91,20 @@
 <!--ANALISIS SENTIMEN-->
 <div class="analisis" id="analisis">
     <p class="analisis-title">ANALISIS SENTIMEN</p>
-	<div class="container">
-		<form>
+	<div class="container" style="width:80%;">
+		<form id="visitor-form">
 			<div class="form-group">
-				<textarea type="text" id="visitor_review" class="form-control textarea" rows="10" spellcheck="false" placeholder="Ketik atau paste review di sini..."></textarea>
+				<textarea type="text" id="visitor-review" class="form-control textarea" rows="8" onkeyup="count_visitor_review(this);" spellcheck="false" placeholder="Ketik atau paste review di sini..."></textarea>
+			    <div class="text-right">
+					<span class="text-muted" id="count-visitor-review">0</span>
+					<span class="text-muted">/7500 karakter</span>
+			    </div>
 			</div>
-			<button class="btn btn-lg btn-secondary">ANALISIS</button>
+			<button class="btn btn-lg btn-secondary" id="visitor-btn" type="submit">LIHAT SENTIMEN</button>
 		</form>
+		<div id="analisis-wrapper">
+			<!--HASIL ANALISIS WILL APPEAR HERE-->
+		</div>
 	</div>
 </div>
 
@@ -151,6 +159,13 @@
 <script src="<?=base_url()?>assets/js/visitor/scroll.js"></script>
 <script src="<?=base_url()?>assets/js/visitor/jquery.waypoints.js"></script>
 <script src="<?=base_url()?>assets/js/visitor/visitor-scripts.js"></script>
+
+<!-- CHARACTER COUNTERS FOR TEXTAREA-->
+<script src="<?=base_url()?>assets/js/countcharacters.js"></script>
+
+<!-- FORM VALIDATION-->
+<script src="<?=base_url()?>assets/js/validation/jquery.validate.js"></script>
+<script src="<?=base_url()?>assets/js/validation/additional-methods.min.js"></script>
 
 </body>
 </html>

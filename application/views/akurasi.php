@@ -23,9 +23,10 @@
                 </div>
             </div>
 
-            <div class="text-right">
-                <button class="btn btn-lg btn-primary" id="akurasibtn"><i class="material-icons material-icons-1-5x">data_usage</i> Hitung Akurasi</button>
-            </div>
+			<!--BUTTON AKURASI-->
+			<div class="btn-fixed">            
+				<button class="btn btn-primary btn-lg" id="akurasibtn"><i class="material-icons material-icons-1-5x">pie_chart</i> Hitung</button>  
+			</div>
             
             <!-- TABLE STARTS HERE-->
             <div id="divtabeltest">

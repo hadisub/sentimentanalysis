@@ -161,8 +161,9 @@ p {
 .panel-default > .panel-heading {
 	color: #000;
 	background-color: #FFFFFF;
-	border-color: #ddd;
-	font-weight:bold;
+	border-bottom: none;
+	font-size: 20px;
+	padding-left: 0;
 }
 
 .jumbotron, .well{
@@ -569,11 +570,17 @@ ul.nav.nav-second-level.collapse.in {
     background-color: #ff0000 !important;
 }
 
+.bg-blue{
+    color: white;
+    background-color: #4CB1CF !important;
+}
+
 .bg-gray{
     color: white;
     background-color: #d3d3d3 !important;
 }
 
+/*BORDERLESS TABLES*/
 .borderless > thead > tr > th,
 .borderless > tbody > tr > th,
 .borderless > tfoot > tr > th,
@@ -586,6 +593,11 @@ ul.nav.nav-second-level.collapse.in {
 
 .borderless > thead > tr > th {
   border-bottom: 0 !important;
+}
+
+.link, .link:hover, .link:focus{
+	text-decoration: none;
+	font-weight: bold;
 }
 
 /*TOASTR */

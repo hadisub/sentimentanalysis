@@ -1,6 +1,13 @@
 <!--TABEL DATA UJI -->
 <div class="row">
-    <div class="col-md-12">
+	<div class="col-lg-5 col-lg-offset-7 text-right">
+        <h2>Akurasi Sistem : <span id="akurasi-percentage"></span>%</h2>
+		<p style="padding:0; margin: 10px 0px;"><a href="#confusion-matrix" class="link">Lihat Selengkapnya</a></p>
+	</div>
+    <div class="col-md-12 panel panel-default">
+		<div class="panel-heading text-center">
+            Tabel Data Uji
+		</div>
     <!-- Advanced Tables -->
         <div class="panel-body">
             <div class="table-responsive">
@@ -49,7 +56,7 @@
 			<table class="borderless">
 				<th width="310"><strong>Akurasi (TP+TN/Total Prediksi)</strong></th>
 				<th width="20">=</th>
-				<th><span id="akurasi-percentage"></span></th>
+				<th><span id="akurasi"></span></th>
 			</table>
 		</div>
 		<div class="alert alert-info">

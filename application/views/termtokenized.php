@@ -26,7 +26,10 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 panel panel-default">
+					<div class="panel-heading text-center">
+						Tabel Kumpulan Term Setelah Proses Tokenizing
+					</div>
                     <!-- Advanced Tables -->
                         <div class="panel-body">
                             <div class="table-responsive">
