@@ -75,7 +75,8 @@
                 </div>
 
             </div>
-            <!-- END OF CARDS -->
+            <!-- AKHIR DARI CARDS -->
+			
     </div>
     <footer><p class="text-center">Copyright &copy 2017 Sentiment Analysis | All right reserved.</a></p></footer>
 </div>

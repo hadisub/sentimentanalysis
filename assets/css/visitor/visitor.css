@@ -2,6 +2,7 @@ body {
 	font-family: Lato, Arial, sans-serif;
     width: 100%!important;
     height: 100%;
+	padding-right: 0px !important
 }
 
 
@@ -201,7 +202,7 @@ body {
 
 /*ANALISIS*/
 .analisis {
-    height: 600px;
+    height: 650px;
     padding-top: 40px;
     text-align: center;
     background: #FFF;
@@ -377,11 +378,34 @@ body {
 	color: #333;
 }
 
+/*FOR VISITOR ANALISIS DIV*/
+#visitor-analisis{
+	margin: 30px 0;
+	background-color: #414A52;
+}
+
+.alert-info{
+	background: transparent;
+	color: #FFF;
+	border: none;
+	margin-bottom: 0;
+}
+
+/*MODAL ALERT*/
+.modal-open {
+  overflow-y: auto;
+}
+
+.modal-header{
+	color:red;
+}
+
 /*LOADER ANIMATION*/
 .loader {
   width: 70px;
   height: 70px;
   margin: 70px auto;
+  position: absolute;
   background-color: #71D5D2;
   border-radius: 100%;
   -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;

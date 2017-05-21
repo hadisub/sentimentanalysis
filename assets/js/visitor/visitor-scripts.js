@@ -1,23 +1,32 @@
 var url = $("meta[name=url]").attr("content");
 
 function extract_review(){
+	isi_review = $("#visitor-review").val();
+	
 	$.ajax({
-		url: url + "visitor/extract_visitor_review",
+		url: url + "visitor/process_visitor_review/",
 		dataType: "json",
 		type: "POST",
-		success: function(data){
-			console.log(data);
-			print_analysis_contents(data);
-			$('#analisis-wrapper').removeClass('loader');
+		data: {'isi_review':isi_review},
+		success: function(results){
+			var arr = [];
+			for(var i in results){
+				arr.push(results[i]);
+			}
+			print_analysis_contents(arr);
+			$('#analisis-wrapper').show();
 		},
 		error: function(){
-			$('#analisis-wrapper').removeClass('loader');
+			$('#analisis-wrapper').show();
 		}
 	});
 }
 
 function print_analysis_contents(contents){
-	$("#isi-review").append(contents);
+	//console.log(contents);
+	$("#pos-prob").append(contents[0]);
+	$("#neg-prob").append(contents[1]);
+	$("#visitor-sentimen").append(contents[2]);
 }
 
 $(document).ready(function(){
@@ -46,11 +55,16 @@ $(document).ready(function(){
 	
 	
 	$('#visitor-form').submit(function(e){
+		var review_text = document.getElementById("visitor-review").value.length;
 		e.preventDefault();
-		$('#analisis-wrapper').html('');
-		$('#analisis-wrapper').load(url+'visitor/display_analisis', function(){
-			$('#analisis-wrapper').addClass('loader');
-			extract_review();
-		});
+		if(review_text==0 || review_text>7500){ //jika textarea tidak diisi atau isi melebihi 75000 karakter
+			$('#modal-error').modal('show'); 
+		}
+		else{
+			$('#analisis-wrapper').load(url+'visitor/display_analisis', function(){
+				$('#analisis-wrapper').hide();
+				extract_review();
+			});
+		}
 	});
 });

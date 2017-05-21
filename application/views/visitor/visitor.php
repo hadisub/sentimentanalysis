@@ -94,7 +94,8 @@
 	<div class="container" style="width:80%;">
 		<form id="visitor-form">
 			<div class="form-group">
-				<textarea type="text" id="visitor-review" class="form-control textarea" rows="8" onkeyup="count_visitor_review(this);" spellcheck="false" placeholder="Ketik atau paste review di sini..."></textarea>
+				<textarea type="text" id="visitor-review" name="visitor-review" class="form-control textarea" rows="8" onkeyup="count_visitor_review(this);" 
+				spellcheck="false" placeholder="Ketik atau paste review di sini..."></textarea>
 			    <div class="text-right">
 					<span class="text-muted" id="count-visitor-review">0</span>
 					<span class="text-muted">/7500 karakter</span>
@@ -103,6 +104,7 @@
 			<button class="btn btn-lg btn-secondary" id="visitor-btn" type="submit">LIHAT SENTIMEN</button>
 		</form>
 		<div id="analisis-wrapper">
+			<div id="loader-wrapper"></div>
 			<!--HASIL ANALISIS WILL APPEAR HERE-->
 		</div>
 	</div>
@@ -151,6 +153,24 @@
 	<p class="footer-text">&copy Copyright Sentiment Analysis. All rights reserved</br>
 	Powered by <a class="link-bootstrap" href="http://getbootstrap.com">Bootstrap</a></p>
 </footer>
+
+<!--MODAL WARNING-->
+<div class="modal fade text-center" id="modal-error" role="dialog">
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">ERROR</h4>
+			</div>
+			<div class="modal-body">
+				<p>Review harus diisi dan tidak boleh berisi lebih dari 7500 karakter.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+			</div>
+		</div>
+    </div>
+</div>
 
 <!--SCRIPTS-->
 <script src="<?=base_url()?>assets/js/jquery.js"></script>

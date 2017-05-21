@@ -8,8 +8,8 @@ class M_Doc_Extraction extends CI_Model{
 	/*------------TOKENIZING------------*/
 	public function tokenizing($review){
 		$lowercase = strtolower($review);
-		$tokens = preg_replace('/[^a-z \-]/','', $lowercase);
-		$tokens = preg_replace('/\s+/', ' ', $tokens);
+		$tokens = preg_replace('/\s+/', ' ', $lowercase);
+		$tokens = preg_replace('/[^a-z \-]/','', $tokens);
 		return $tokens;
 		}
 

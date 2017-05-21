@@ -156,7 +156,7 @@ class M_Classifier extends CI_Model{
 		$this->db->insert_batch('sa_term',$data);	
 	}
 	
-	/*----PROSES TESTING NAIVE BAYES----*/
+	/*----PROSES KLASIFIKASI NAIVE BAYES UNTUK TESTING----*/
 	
 	//ambil seluruh term di tabel review yang kategorinya data uji (untuk ADMIN)
 	public function all_terms_testdata(){
@@ -166,35 +166,6 @@ class M_Classifier extends CI_Model{
 		$this->db->join('sa_bagofwords', 'sa_bagofwords.id_review = sa_review.id_review');
 		$array_all_term = $this->db->get()->result_array();
 		return $array_all_term;
-	}
-	
-	//ambil seluruh term dari textarea (untuk VISITOR)
-	public function all_terms_visitor(){
-		
-	}
-	
-	public function get_role(){
-		$role="";
-		if($this->session->userdata('logged_in')){
-			$role="admin";
-		}else{
-			$role="visitor";
-		}
-		return $role;
-	}
-	
-	public function get_test_terms($role){
-		$array_terms = array();
-		switch ($role) {
-			case 'admin':
-            $array_terms = $this->all_terms_testdata();
-            break;
-			
-			case 'visitor':
-            $array_terms = $this->all_terms_visitor();
-            break;
-		}
-		return $array_terms;
 	}
 	
 	//ambil pos dan neg occurences di tabel term
@@ -227,9 +198,8 @@ class M_Classifier extends CI_Model{
 	
 	//proses perhitungan naive bayes
 	public function naive_bayes(){
-		$role = $this->get_role();
 		$vocab_count = count($this->vocabulary()); //jumlah vocabulary (unique terms)
-		$array_testdata = $this->get_test_terms($role); //ambil seluruh term di data uji / textarea visitor (tergantung role)
+		$array_testdata = $this->all_terms_testdata(); //ambil seluruh term di data uji / textarea visitor (tergantung role)
 		$total_pos_terms = count($this->array_pos_terms()); //jumlah seluruh term di kelas positif
 		$total_neg_terms = count($this->array_neg_terms()); //jumlah seluruh term di kelas negatif
 		$array_occ_db = $this->array_occ_db(); //ambil kemunculan kata
@@ -287,6 +257,61 @@ class M_Classifier extends CI_Model{
 			$best_class = "NEGATIF";
 		}
 		return $best_class;
+	}
+	
+	
+	/*----PROSES KLASIFIKASI NAIVE BAYES UNTUK VISITOR----*/
+	
+	//bersihkan whitespaces dan ubah ke array
+	public function visitor_clean_space($stemmed_review){
+		$all_terms = preg_replace('/\s+/', ' ', $stemmed_review);
+		$array_terms = explode(" ",$all_terms);
+		
+		return $array_terms;
+	}
+	
+	//proses klasifikasi
+	public function naive_bayes_visitor($stemmed_review){
+		$array_terms = $this->visitor_clean_space($stemmed_review); //array berisi semua term dari review visitor
+		$vocab_count = count($this->vocabulary()); //jumlah vocabulary (unique terms)
+		$total_pos_terms = count($this->array_pos_terms()); //jumlah seluruh term di kelas negatif
+		$total_neg_terms = count($this->array_neg_terms()); //jumlah seluruh term di kelas negatif
+		$array_occ_db = $this->array_occ_db(); //ambil kemunculan kata
+		$pos_prior_prob = log($this->pos_prior_prob()); //prior probability kelas positif
+		$neg_prior_prob = log($this->neg_prior_prob()); //prior probability kelas negatif
+		$pos_post_prob = 0; 
+		$neg_post_prob = 0;
+		$array_results = array();
+		
+		foreach($array_terms as $term){
+			$pos_occ_in_class = 0;
+			$neg_occ_in_class = 0;
+			for($i=0; $i < count($array_occ_db);$i++){
+				if($array_occ_db[$i]["term"] == $term){
+				$pos_occ_in_class = $array_occ_db[$i]["pos_occ"];
+				$neg_occ_in_class = $array_occ_db[$i]["neg_occ"];
+				break;
+				}
+			}
+			/*---posterior probability kelas C = jumlah kemunculan kata x di semua review di kategori C  + 1)
+			/(jumlah semua kata di kategori C + jumlah semua unique words/vocabulary di semua kategori di data latih---*/
+			$pos_post_prob += log(($pos_occ_in_class+1)/($total_pos_terms+$vocab_count)); //posterior probability review C di kelas positif
+			$neg_post_prob += log(($neg_occ_in_class+1)/($total_neg_terms+$vocab_count)); //posterior probability review C di kelas negatif
+		}
+		
+		//P kelas positif dokumen C = P kelas positif (prior probability)* posterior probability
+		$pos_prob_visitor = $pos_prior_prob+$pos_post_prob;
+		
+		//P kelas negatif dokumen C = P kelas negatif (prior probability)* posterior probability
+		$neg_prob_visitor = $neg_prior_prob+$neg_post_prob;
+		
+		//ambil kelas terbaik (which one of 2 classes is higher in probability)
+		$best_class= $this->best_class($pos_prob_visitor,$neg_prob_visitor);
+		
+		//masukkan hasil perhitungan ke dalam array hasil klasifikasi
+		$array_results = array($pos_prob_visitor,$neg_prob_visitor,$best_class);
+		
+		return $array_results;
 	}
 	
 	//isi badge di tabel

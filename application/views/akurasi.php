@@ -28,11 +28,11 @@
 				<button class="btn btn-primary btn-lg" id="akurasibtn"><i class="material-icons material-icons-1-5x">pie_chart</i> Hitung</button>  
 			</div>
             
-            <!-- TABLE STARTS HERE-->
+            <!--TABEL MULAI DI SINI-->
             <div id="divtabeltest">
-                <!--TABLE CONTENTS ARE LOADED HERE -->
+                <!--TABEL DIMUAT DI SINI -->
             </div>
-            <!--TABLE ENDS HERE --> 
+            <!--TABEL BERAKHIR DI SINI--> 
 
             </div>
             <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>

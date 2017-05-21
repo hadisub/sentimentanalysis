@@ -17,7 +17,7 @@
         
         <!--/. SIDEBAR TOP  -->
         <?php $this->load->view('template'); ?>
-        <!-- /. END OF SIDEBAR  -->
+        <!-- /. AKHIR DARI SIDEBAR  -->
         <div id="page-wrapper">
             <div id="page-inner">
 

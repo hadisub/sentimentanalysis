@@ -16,7 +16,7 @@
     <!--/. SIDEBAR TOP  -->
     <?php $this->load->view('template'); ?>
     
-    <!-- /. END OF SIDEBAR  -->
+    <!-- /. AKHIR DARI SIDEBAR  -->
     <div id="page-wrapper">
       <div id="page-inner">
 
@@ -33,13 +33,13 @@
           <button data-target="#modaldataset" data-toggle="modal" class="btn btn-primary btn-circle-lg btn-circle btn-circle-lg btn-add"><i class="material-icons material-icons-2x">note_add</i></button>  
         </div>
         
-			   <!--TABLE-->   
+			   <!--TABEL-->   
         <div class="row">
           <div class="col-md-12 panel panel-default">
 			<div class="panel-heading text-center">
 				Tabel Dataset Review Film
 			</div>
-            <!-- Advanced Tables -->
+            <!-- DATATABLE-->
 					   <div class="panel-body">
   						<div class="table-responsive">
   							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -57,10 +57,10 @@
   						</div>
 						
 					   </div>
-                    <!--End Advanced Tables -->
+                    <!--DATATABLE END-->
                 </div>
             </div>
-				<!-- END OF TABLE-->
+				<!-- AKHIR DARI TABEL-->
         <!-- FOOTER-->
         <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis.id | All right reserved.</a></p></footer>
             </div>
@@ -121,7 +121,7 @@
           </form>
       </div>
     </div>
-<!--END OF MODAL FORM-->
+<!--AKHIR DARI MODAL FORM-->
 
 <!-- MODAL FORM HAPUS DATASET-->
             
