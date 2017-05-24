@@ -28,11 +28,11 @@
 				<button class="btn btn-primary btn-lg" id="trainbtn"><i class="material-icons material-icons-1-5x">playlist_play</i> Latih</button>  
 			</div>
 				
-            <!-- TABLE STARTS HERE-->
+            <!-- TABEL DIMULAI DI SINI-->
             <div id="divtabeltraining">
 				<!--TABLE CONTENTS ARE LOADED HERE -->
             </div>
-            <!--TABLE ENDS HERE -->   
+            <!--TABEL BERAKHIR DI SINI -->   
 		</div>
 		<footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>
 	</div>

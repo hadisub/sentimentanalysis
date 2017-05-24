@@ -14,9 +14,9 @@
 <body>
 <div id="wrapper">
     
-        <!--/. SIDEBAR TOP  -->
+        <!-- SIDEBAR TOP  -->
         <?php $this->load->view('template'); ?>
-        <!-- /. END OF SIDEBAR  -->
+        <!-- AKHIR DARI SIDEBAR  -->
         <div id="page-wrapper">
             <div id="page-inner">
 
@@ -28,22 +28,18 @@
                     </div>
 
                 </div>
-                <!-- TABLE LABEL-->
 
             <!--BUTTON TAMBAH -->
             <div class="btn-fixed">            
             <button a href="#modalstopwords" data-toggle ="modal" class="btn btn-circle btn-circle-lg btn-primary btn-add text-right"><i class="material-icons material-icons-2x">playlist_add</i></button>   
             </div>
 
-				<!--TABLE-->
-				     <!-- /. ROW  -->
-               
             <div class="row">
                 <div class="col-md-12 panel panel-default">
 					<div class="panel-heading text-center">
 						Tabel Kumpulan Kata-Kata yang Dapat Dihilangkan (Stop Words)
 					</div>
-                    <!-- Advanced Tables -->
+                    <!-- Datatable -->
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="dataTables-example">
@@ -60,17 +56,17 @@
                             
                         </div>
                     </div>
-                    <!--End Advanced Tables -->
+                    <!--Akhir dari datatable -->
                 </div>
             </div>
-				<!-- END OF TABLE-->
+
         <!-- FOOTER-->
         <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>
             </div>
             </div>
-            <!-- /. PAGE INNER  -->
+            <!--PAGE INNER  -->
         </div>
-        <!-- /. PAGE WRAPPER  -->
+        <!--PAGE WRAPPER  -->
 
 <!-- MODAL FORM TAMBAH DAN EDIT STOP WORDS-->
             
@@ -104,7 +100,7 @@
           </form>
       </div>
     </div>
-    <!--END OF MODAL FORM-->
+    <!--AKHIR DARI MODAL FORM-->
 
 <!-- MODAL FORM HAPUS STOP WORDS-->
             
@@ -128,7 +124,7 @@
           </form>
       </div>
     </div>
-    <!--END OF MODAL FORM-->
+    <!--AKHIR DARI MODAL FORM-->
 	
 	<!-- SCRIPTS -->
 	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>

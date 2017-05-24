@@ -23,7 +23,7 @@ class Auth extends CI_Controller {
 		$username= $this->input->post("username");
 		$password= $this->input->post("password");
 		
-		//check input validation
+		//cek input validation
 		$this->form_validation->set_rules('username','Username','trim|required|max_length[40]');
 		$this->form_validation->set_rules('password','Password','trim|required|max_length[40]');
 		if ($this->form_validation->run() == FALSE){

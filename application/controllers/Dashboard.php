@@ -17,7 +17,5 @@ class Dashboard extends CI_Controller{
 		$data['total_testdata'] = $this->m_classifier->count_total_testdata();
 		$this->load->view('dashboard',$data);
 	}
-
-
 }
 ?>

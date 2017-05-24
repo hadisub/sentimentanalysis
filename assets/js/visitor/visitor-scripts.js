@@ -13,11 +13,14 @@ function extract_review(){
 			for(var i in results){
 				arr.push(results[i]);
 			}
+			$('#loader-wrapper').removeClass("loader");
 			print_analysis_contents(arr);
 			$('#analisis-wrapper').show();
 		},
 		error: function(){
+			$('#loader-wrapper').removeClass("loader");
 			$('#analisis-wrapper').show();
+			alert("Tidak dapat memroses hasil analisis.");
 		}
 	});
 }
@@ -57,14 +60,15 @@ $(document).ready(function(){
 	$('#visitor-form').submit(function(e){
 		var review_text = document.getElementById("visitor-review").value.length;
 		e.preventDefault();
-		if(review_text==0 || review_text>7500){ //jika textarea tidak diisi atau isi melebihi 75000 karakter
+		$('#analisis-wrapper').html('');
+		if(review_text==0 || review_text>7500){ //jika textarea tidak diisi atau isi melebihi 7500 karakter
 			$('#modal-error').modal('show'); 
 		}
 		else{
-			$('#analisis-wrapper').load(url+'visitor/display_analisis', function(){
-				$('#analisis-wrapper').hide();
-				extract_review();
-			});
+			$('#loader-wrapper').addClass("loader");
+			$('#analisis-wrapper').hide();
+			$('#analisis-wrapper').load(url+'visitor/display_analisis');
+			extract_review();
 		}
 	});
 });

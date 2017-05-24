@@ -159,11 +159,20 @@ p {
 }
 
 .panel-default > .panel-heading {
-	color: #000;
-	background-color: #FFFFFF;
+	color: #333;
+	background-color: #FFF;
 	border-bottom: none;
 	font-size: 20px;
 	padding-left: 0;
+}
+
+.panel-default > .panel-heading-small {
+	color: #333;
+	background-color: #FFF;
+	border-bottom: none;
+	padding: 10px;
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .jumbotron, .well{
@@ -598,6 +607,13 @@ ul.nav.nav-second-level.collapse.in {
 .link, .link:hover, .link:focus{
 	text-decoration: none;
 	font-weight: bold;
+}
+
+/*MORRIS CHART*/
+.chart{
+	width: 250px;
+	height: 250px;
+	margin: auto;
 }
 
 /*TOASTR */

@@ -3,7 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Doc_Extraction extends CI_Model{
 
-	private $arraykatadasar;
+	private $arraykatadasar = array();
+	private $arraytoken = array();
+	private $arrayfiltered = array();
+	private $arraystemmed = array();
 
 	/*------------TOKENIZING------------*/
 	public function tokenizing($review){
@@ -17,7 +20,7 @@ class M_Doc_Extraction extends CI_Model{
 	/*------------FILTERING------------*/
 	public function filtering($hasiltoken){
 		//ubah string ke array
-		$arraytoken = explode(" ",$hasiltoken);
+		$this->arraytoken = explode(" ",$hasiltoken);
 
 		//ambil stop words dan diubah ke array
 		$this->db->select('kata_stopwords');
@@ -28,10 +31,10 @@ class M_Doc_Extraction extends CI_Model{
 		$arraystopwords= array_column($arraystopwords,'kata_stopwords');
 		
 		//bandingkan dua array
-		$arrayfiltered = array_diff($arraytoken,$arraystopwords);
+		$this->arrayfiltered = array_diff($this->arraytoken,$arraystopwords);
 		
 		//ubah hasil filter ke string
-		$hasilfilter = implode(" ",$arrayfiltered);
+		$hasilfilter = implode(" ",$this->arrayfiltered);
 		return $hasilfilter;
 	}
 
@@ -40,8 +43,7 @@ class M_Doc_Extraction extends CI_Model{
 	public function stemming($hasilfiltered){
 
 		//ubah string ke array
-		$arrayfiltered = explode(" ",$hasilfiltered);
-		$arraystemmed=array();
+		$this->arrayfiltered = explode(" ",$hasilfiltered);
 		
 		//ambil katadasar words dan diubah ke array
 		$this->db->select('kata_katadasar');
@@ -52,17 +54,17 @@ class M_Doc_Extraction extends CI_Model{
 		$this->arraykatadasar = array_column($arraykatdas,'kata_katadasar');
 
 		//looping
-		foreach ($arrayfiltered as $kataawal){
+		foreach ($this->arrayfiltered as $kataawal){
 			$term = $kataawal;
 			
 			if(strlen($term)<=3){ //jangan stem kata pendek (di bawah tiga huruf)
-				array_push($arraystemmed,$term);
+				array_push($this->arraystemmed,$term);
 				continue;
 			}
 
 			$cekterm = $this->cekterm($term);
 			if($cekterm==true){
-				array_push($arraystemmed, $term);
+				array_push($this->arraystemmed, $term);
 				continue;
 			}
 
@@ -75,18 +77,18 @@ class M_Doc_Extraction extends CI_Model{
 
 					if($katasatu==$katadua){
 						$term = $katasatu;
-						array_push($arraystemmed, $term);
+						array_push($this->arraystemmed, $term);
 						continue;
 					}
 					else{
 						$katasatu = $this->cek_reduplikasi($katasatu);
 						$katadua = $this->cek_reduplikasi($katadua);
 						if($katasatu==$katadua){
-							array_push($arraystemmed, $katasatu);
+							array_push($this->arraystemmed, $katasatu);
 						}
 						else{
-							array_push($arraystemmed, $katasatu);
-							array_push($arraystemmed, $katadua);
+							array_push($this->arraystemmed, $katasatu);
+							array_push($this->arraystemmed, $katadua);
 						}
 						continue;
 					}
@@ -95,7 +97,7 @@ class M_Doc_Extraction extends CI_Model{
 				$term = $this->del_inf_suff($term);
 				$cekterm = $this->cekterm($term);
 				if($cekterm==true){
-					array_push($arraystemmed, $term);
+					array_push($this->arraystemmed, $term);
 					continue;
 
 				}
@@ -103,25 +105,25 @@ class M_Doc_Extraction extends CI_Model{
 				$term = $this->del_der_suff($term);
 				$cekterm = $this->cekterm($term);
 				if($cekterm==true){
-					array_push($arraystemmed, $term);
+					array_push($this->arraystemmed, $term);
 					continue;
 				}
 
 				$term = $this->del_der_pre($term);
 				$cekterm = $this->cekterm($term);
 				if($cekterm==true){
-					array_push($arraystemmed, $term);
+					array_push($this->arraystemmed, $term);
 					continue;
 				}
 
 				//jika setelah dipotong semua awalan dan akhiran tetap tidak ada
 				//maka kata awal dimasukkan ke array hasil stem
-				array_push($arraystemmed, $kataawal);
+				array_push($this->arraystemmed, $kataawal);
 			}
 
 		}
 
-		$hasilstemming= implode(" ",$arraystemmed);
+		$hasilstemming= implode(" ",$this->arraystemmed);
 		return $hasilstemming;
 	}
 

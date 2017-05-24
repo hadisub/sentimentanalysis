@@ -41,8 +41,10 @@ function print_matrix_contents(matrix){
 	$("#false-negatives").append(matrix[4]); //false negatives
 	$("#akurasi").append(matrix[5]); //akurasi
 	$("#error-rate").append(matrix[6]); //error rate
-	$("#presisi").append(matrix[7]); //presisi
-	$("#recall").append(matrix[8]); //error rate
+	$("#ppv").append(matrix[7]); //positive predictive value
+	$("#npv").append(matrix[8]); //negative predictive value
+	$("#sensitivity").append(matrix[9]); //sensitivity
+	$("#specificity").append(matrix[10]); //specitivity
 	
 	$("#akurasi-percentage").append((matrix[5]*100).toFixed(2)); //error rate
 	

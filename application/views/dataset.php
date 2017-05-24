@@ -13,10 +13,10 @@
 </head>
 <body>
   <div id="wrapper">
-    <!--/. SIDEBAR TOP  -->
+    <!-- SIDEBAR TOP  -->
     <?php $this->load->view('template'); ?>
     
-    <!-- /. AKHIR DARI SIDEBAR  -->
+    <!-- AKHIR DARI SIDEBAR  -->
     <div id="page-wrapper">
       <div id="page-inner">
 
@@ -39,7 +39,7 @@
 			<div class="panel-heading text-center">
 				Tabel Dataset Review Film
 			</div>
-            <!-- DATATABLE-->
+            <!-- Datatable -->
 					   <div class="panel-body">
   						<div class="table-responsive">
   							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -57,16 +57,16 @@
   						</div>
 						
 					   </div>
-                    <!--DATATABLE END-->
+                    <!-- Akhir dari datatable -->
                 </div>
             </div>
-				<!-- AKHIR DARI TABEL-->
+
         <!-- FOOTER-->
         <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis.id | All right reserved.</a></p></footer>
             </div>
-            <!-- /. PAGE INNER  -->
+            <!-- PAGE INNER  -->
         </div>
-        <!-- /. PAGE WRAPPER  -->
+        <!-- PAGE WRAPPER  -->
     </div>
 
 <!-- MODAL FORM TAMBAH DAN EDIT REVIEW-->
@@ -145,7 +145,7 @@
           </form>
       </div>
     </div>
-    <!--END OF MODAL FORM-->
+    <!--AKHIR DARI OF MODAL FORM-->
 	
 	<!--SCRIPTS-->
 	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
@@ -162,7 +162,7 @@
 	<!-- Custom Js -->
 	<script src="<?=base_url()?>assets/js/custom-scripts.js"></script>
 
-	<!-- CHARACTER COUNTERS FOR TEXTAREA-->
+	<!-- CHARACTER COUNTERS UNTUK TEXTAREA REVIEW-->
 	<script src="<?=base_url()?>assets/js/countcharacters.js"></script>
 
 	<!-- FORM VALIDATION-->

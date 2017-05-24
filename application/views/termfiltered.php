@@ -30,7 +30,7 @@
 					<div class="panel-heading text-center">
 						Tabel Kumpulan Term Setelah Proses Filtering
 					</div>
-                    <!-- Advanced Tables -->
+                    <!-- Datatable -->
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="dataTables-example">
@@ -46,7 +46,7 @@
                             
                         </div>
                     </div>
-                    <!--End Advanced Tables -->
+                    <!--Akhir dari datatable -->
                 </div>
                 <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>
             </div>

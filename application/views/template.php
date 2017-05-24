@@ -67,7 +67,6 @@ if(isset($title)){
 
             <ul class="nav navbar-top-links navbar-right user-dropdown">
                 <!-- /.dropdown -->
-                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="material-icons">perm_identity</i> <?php echo $this->session->userdata('name')?> <i class="material-icons">arrow_drop_down</i> 
@@ -80,7 +79,7 @@ if(isset($title)){
                 <!-- /.dropdown -->
             </ul>
         </nav>
-<!-- END OF HEADER-->
+<!-- AKHIR DARI HEADER-->
 
 
 <!-- SIDEBAR-->
@@ -92,13 +91,13 @@ if(isset($title)){
                         <a class="<?=$dashboard_active?>" href="<?=site_url()?>dashboard"><i class="material-icons">laptop</i> Dashboard</a>
                     </li>
 					<li>
+                        <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="material-icons">storage</i> Dataset</a>
+                    </li>
+					<li>
                         <a class="<?=$train_active?>" href="<?=site_url()?>train"><i class="material-icons">playlist_play</i> Latih Sistem</a>
                     </li>
                     <li>
                         <a class="<?=$akurasi_active?>" href="<?=site_url()?>akurasi"><i class="material-icons">pie_chart</i> Hitung Akurasi</a>
-                    </li>
-					<li>
-                        <a class="<?=$dataset_active?>" href="<?=site_url()?>dataset"><i class="material-icons">storage</i> Dataset</a>
                     </li>
                     <li>
                         <a class="<?=$katadasar_active?>" href="<?=site_url()?>katadasar"><i class="material-icons">question_answer</i> Kata Dasar</a>
@@ -131,7 +130,7 @@ if(isset($title)){
         
         </nav>
 
- <!-- END OF SIDEBAR-->
+ <!-- AKHIR DARI SIDEBAR-->
 
  <!-- MODAL TENTANG -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -154,4 +153,4 @@ if(isset($title)){
                     </div>
                 </div>
             </div>
-<!--END OF MODAL TENTANG-->
+<!--AKHIR DARI MODAL TENTANG-->

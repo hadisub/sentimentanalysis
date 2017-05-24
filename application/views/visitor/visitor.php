@@ -46,14 +46,14 @@
                     class="fa fa-github"></i> Fork di Github</a>
         </div>
     </div>
-</nav><!--END OF NAVBAR -->
+</nav><!--AKHIR DARI NAVBAR -->
 
 <!--INTRO-->
 <div class="jumbotron sa-jumbotron text-center" id="jumbo">
     <div class="container jumbo-vertical-center">
         <h1>Sistem Analisis Sentimen <br> Review Film</h1>
-        <p>Lorem ipsum dolor set amet, consectetur adipiscing elit. Mauris ac enim felis.
-            Lorem ipsum dolor set amet, consectetur adipiscing elit. Mauris ac enim felis.
+        <p>Ini adalah versi publik dari sistem analisis sentimen review film. Sistem ini dapat memberitahu anda sentimen dari review film yang anda masukkan. 
+		Sentimen dari review anda dapat berupa sentimen positif atau negatif.
         </p>
     </div>
     <a class="btn btn-lg btn-primary page-scroll" href="#analisis">Masukkan Review Anda</a>
@@ -103,9 +103,9 @@
 			</div>
 			<button class="btn btn-lg btn-secondary" id="visitor-btn" type="submit">LIHAT SENTIMEN</button>
 		</form>
+		<div id="loader-wrapper"></div>
 		<div id="analisis-wrapper">
-			<div id="loader-wrapper"></div>
-			<!--HASIL ANALISIS WILL APPEAR HERE-->
+			<!--HASIL ANALISIS DIMUAT DI SINI-->
 		</div>
 	</div>
 </div>
@@ -141,8 +141,8 @@
 					<h3>TENTANG NAIVE BAYES</h3>
 				</div>
 				<div class="about-wrapper about-us">
-					<p>Lorem ipsum dolor set amet, consectetur adipiscing elit. Mauris ac enim felis.
-            Lorem ipsum dolor set amet, consectetur adipiscing elit. Mauris ac enim felis.</p>
+					<p>Sistem Analisis Sentimen Review Film menggunakan metode Naive Bayes untuk menghitung probabilitas review film yang diberikan. 
+					Deskripsi metode Naive Bayes lebih lengkap dapat dilihat di <a class="link-bootstrap"href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier">tautan berikut.</a></p>
 				</div>
 			</div>
 		</div>
@@ -180,7 +180,7 @@
 <script src="<?=base_url()?>assets/js/visitor/jquery.waypoints.js"></script>
 <script src="<?=base_url()?>assets/js/visitor/visitor-scripts.js"></script>
 
-<!-- CHARACTER COUNTERS FOR TEXTAREA-->
+<!-- CHARACTER COUNTERS UNTUK TEXTAREA REVIEW VISITOR -->
 <script src="<?=base_url()?>assets/js/countcharacters.js"></script>
 
 <!-- FORM VALIDATION-->

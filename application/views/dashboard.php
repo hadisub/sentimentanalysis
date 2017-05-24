@@ -30,7 +30,7 @@
                     <div class="panel panel-primary text-center no-border bg-color-blue">
                         <div class="panel-body">
                             <i class="material-icons material-icons-5x">library_books</i>
-                            <h3><?php echo $total_traindata; ?></h3>
+                            <h3 id="jumlah-data-latih"><?php echo $total_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-blue">
                             Jumlah Review Data Latih
@@ -42,7 +42,7 @@
                     <div class="panel panel-primary text-center no-border bg-color-green">
                         <div class="panel-body">
                             <i class="material-icons material-icons-5x">thumb_up</i>
-                            <h3><?php echo $pos_traindata; ?></h3>
+                            <h3 id="jumlah-data-latih-positif"><?php echo $pos_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-green">
                             Review Data Latih Positif
@@ -54,7 +54,7 @@
                     <div class="panel panel-primary text-center no-border bg-color-red">
                         <div class="panel-body">
                             <i class="material-icons material-icons-5x">thumb_down</i>
-                            <h3><?php echo $neg_traindata; ?></h3>
+                            <h3 id="jumlah-data-latih-negatif"><?php echo $neg_traindata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-red">
                             Review Data Latih Negatif
@@ -66,7 +66,7 @@
                     <div class="panel panel-primary text-center no-border bg-color-brown">
                         <div class="panel-body">
                             <i class="material-icons material-icons-5x">library_books</i>
-                            <h3><?php echo $total_testdata; ?></h3>
+                            <h3 id="jumlah-data-uji"><?php echo $total_testdata; ?></h3>
                         </div>
                         <div class="panel-footer back-footer-brown">
                             Jumlah Review Data Uji
@@ -77,6 +77,31 @@
             </div>
             <!-- AKHIR DARI CARDS -->
 			
+			<!--CHART-->
+			<div class="row">
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="panel panel-default text-center no-border">
+						<div class="panel-heading-small">
+							Perbandingan Data Latih dan Data Uji
+						</div>
+						<div class="panel-body">
+							<div id="latih-dan-uji-chart" class="chart"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="panel panel-default text-center no-border">
+						<div class="panel-heading-small">
+							Perbandingan Data Latih Positif dan Negatif
+						</div>
+						<div class="panel-body">
+							<div id="pos-neg-chart" class="chart"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--AKHIR DARI CHART-->
+			
     </div>
     <footer><p class="text-center">Copyright &copy 2017 Sentiment Analysis | All right reserved.</a></p></footer>
 </div>
@@ -85,15 +110,17 @@
 	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.js"></script>
 	
-<!-- DATA TABLE SCRIPTS -->
-    <script src="<?=base_url()?>assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="<?=base_url()?>assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script src="<?=base_url()?>assets/js/dashboard.js"></script>
-	
 <!-- METIS MENU SCRIPTS-->
 	<script src="<?=base_url()?>assets/js/jquery.metisMenu.js"></script>
-      <!-- Custom Js -->
+
+<!-- MORRIS JS -->
+<script src="<?=base_url()?>assets/js//charts/raphael.min.js"></script>
+    <script src="<?=base_url()?>assets/js//charts/morris.min.js"></script>
+	
+<!-- Custom JS -->
     <script src="<?=base_url()?>assets/js/custom-scripts.js"></script>
+	<script src="<?=base_url()?>assets/js/dashboard.js"></script>
+	
 
 </body>
 

@@ -34,15 +34,13 @@
             <div class="btn-fixed">            
 				<button a href="#modalkatadasar" data-toggle = "modal" class="btn btn-circle btn-circle-lg btn-primary btn-add text-right"><i class="material-icons material-icons-2x">playlist_add</i></button>   
             </div>
-				    <!--TABLE-->
-				     <!-- /. ROW  -->
             <div class="row">
 
                 <div class="col-md-12 panel panel-default">
 					<div class="panel-heading text-center">
 						Tabel Kumpulan Kata Dasar Bahasa Indonesia
 					</div>
-                    <!-- Advanced Tables -->
+                    <!-- Datatable -->
 					<div class="panel-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover" id="dataTables-example">
@@ -59,17 +57,16 @@
 						
 					</div>
                 </div>
-                    <!--End Advanced Tables -->
+                    <!--Akhir dari datatable -->
             </div>
             </div>
-				<!-- END OF TABLE-->
 
         <!-- FOOTER-->
         <footer><p class="text-center">Copyright &copy 2016 Sentiment Analysis | All right reserved.</a></p></footer>
             </div>
-            <!-- /. PAGE INNER  -->
+            <!-- PAGE INNER  -->
         </div>
-        <!-- /. PAGE WRAPPER  -->
+        <!-- PAGE WRAPPER  -->
 </div>
 
 <!-- MODAL FORM TAMBAH DAN EDIT KATA DASAR-->
@@ -104,7 +101,7 @@
           </form>
       </div>
     </div>
-    <!--END OF MODAL FORM-->
+    <!--AKHIR DARI MODAL FORM-->
 
     <!-- MODAL FORM HAPUS KATA DASAR-->
             
@@ -128,7 +125,7 @@
           </form>
       </div>
     </div>
-    <!--END OF MODAL FORM-->
+    <!--AKHIR DARI MODAL FORM-->
 	
 	<!-- SCRIPTS -->
 	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
@@ -144,7 +141,7 @@
       <!-- Custom Js -->
     <script src="<?=base_url()?>assets/js/custom-scripts.js"></script>
 
-    <!-- CHARACTER COUNTERS FOR INPUT-->
+    <!-- CHARACTER COUNTERS UNTUK INPUT-->
     <script src="<?=base_url()?>assets/js/countcharacters.js"></script>
 
     <!-- FORM VALIDATION-->

@@ -8,7 +8,7 @@
 		<div class="panel-heading text-center">
             Tabel Data Uji
 		</div>
-    <!-- Advanced Tables -->
+    <!-- Datatable -->
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="dataTables-example">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <!--End Advanced Tables -->
+    <!--Akhir dari datatable -->
 	<div class="col-md-12" id="confusion-matrix">
 		<!--Confusion Matrix-->
 		<div class="alert alert-info">
@@ -68,16 +68,30 @@
 		</div>
 		<div class="alert alert-info">
 			<table class="borderless">
-				<th width="310"><strong>Presisi (TP/TP+FP)</strong></th>
+				<th width="310"><strong>Positive Predictive Value / Presisi (TP/TP+FP)</strong></th>
 				<th width="20">=</th>
-				<th><span id="presisi"></span></th>
+				<th><span id="ppv"></span></th>
 			</table>
 		</div>
 		<div class="alert alert-info">
 			<table class="borderless">
-				<th width="310"><strong>Recall (TP/TP+FN)</strong></th>
+				<th width="310"><strong>Negative Predictive Value (TN/TN+FN)</strong></th>
 				<th width="20">=</th>
-				<th><span id="recall"></span></th>
+				<th><span id="npv"></span></th>
+			</table>
+		</div>
+				<div class="alert alert-info">
+			<table class="borderless">
+				<th width="310"><strong>Sensitivity / Recall (TP/TP+FN)</strong></th>
+				<th width="20">=</th>
+				<th><span id="sensitivity"></span></th>
+			</table>
+		</div>
+				<div class="alert alert-info">
+			<table class="borderless">
+				<th width="310"><strong>Specitivity (TN/TN+FP)</strong></th>
+				<th width="20">=</th>
+				<th><span id="specificity"></span></th>
 			</table>
 		</div>
 		<!--End COnfusion Matrix-->

@@ -4,7 +4,7 @@
 		<div class="panel-heading text-center">
             Tabel Feature Sets Data Latih
 		</div>
-    <!-- Advanced Tables -->
+    <!-- Datatable -->
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="dataTables-example">
@@ -20,5 +20,5 @@
             </div>
         </div>
     </div>
-    <!--End Advanced Tables -->
+    <!--Akhir dari datatable -->
 </div>

@@ -381,14 +381,12 @@ body {
 /*FOR VISITOR ANALISIS DIV*/
 #visitor-analisis{
 	margin: 30px 0;
-	background-color: #414A52;
 }
 
 .alert-info{
-	background: transparent;
-	color: #FFF;
 	border: none;
-	margin-bottom: 0;
+	background-color: #71D5D2;
+	margin-bottom: 10;
 }
 
 /*MODAL ALERT*/
@@ -405,7 +403,7 @@ body {
   width: 70px;
   height: 70px;
   margin: 70px auto;
-  position: absolute;
+  z-index: 9999;
   background-color: #71D5D2;
   border-radius: 100%;
   -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;

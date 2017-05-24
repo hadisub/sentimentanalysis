@@ -196,6 +196,23 @@ class M_Classifier extends CI_Model{
 		return $neg_prior;
 	}
 	
+	//normalisasi log likelihood ke probability
+	public function normalize_log($pos,$neg){
+		$max_val = max($pos,$neg);//likelihood terbesar
+		
+		$pos = $max_val/$pos;
+		$neg = $max_val/$neg;
+		
+		$exp_pos = exp($pos);
+		$exp_neg = exp($neg);
+		
+		$pos_prob = $exp_pos/($exp_pos+$exp_neg);
+		$neg_prob = $exp_neg/($exp_pos+$exp_neg);
+		
+		$array_results = array("pos_prob"=>$pos_prob, "neg_prob"=>$neg_prob);
+		return $array_results;
+	}
+	
 	//proses perhitungan naive bayes
 	public function naive_bayes(){
 		$vocab_count = count($this->vocabulary()); //jumlah vocabulary (unique terms)
@@ -233,11 +250,18 @@ class M_Classifier extends CI_Model{
 				$neg_post_prob += log(($neg_occ_in_class+1)/($total_neg_terms+$vocab_count)); //posterior probability dokumen C di kelas negatif
 			}
 			
-			//P kelas positif dokumen C = P kelas positif (prior probability)* posterior probability
-			$pos_prob_datauji = $pos_prior_prob+$pos_post_prob;
+			//likelihood kelas positif dokumen C = P kelas positif (prior probability)* posterior probability
+			//log likelihood kelas positif dokumen C = log prior probability + sum log posterior probability
+			$pos_likelihood_datauji = $pos_prior_prob+$pos_post_prob;
 			
-			//P kelas negatif dokumen C = P kelas negatif (prior probability)* posterior probability
-			$neg_prob_datauji = $neg_prior_prob+$neg_post_prob;
+			//likelihood kelas negatif dokumen C = P kelas negatif (prior probability)* posterior probability
+			//log likelihood kelas negatif dokumen C = log prior probability + sum log posterior probability
+			$neg_likelihood_datauji = $neg_prior_prob+$neg_post_prob;
+			
+			//normalisasi
+			$array_prob = $this->normalize_log($pos_likelihood_datauji,$neg_likelihood_datauji);
+			$pos_prob_datauji = $array_prob["pos_prob"];
+			$neg_prob_datauji = $array_prob["neg_prob"];
 			
 			//ambil kelas terbaik (which one of 2 classes is higher in probability)
 			$best_class= $this->best_class($pos_prob_datauji,$neg_prob_datauji);
@@ -299,13 +323,19 @@ class M_Classifier extends CI_Model{
 			$neg_post_prob += log(($neg_occ_in_class+1)/($total_neg_terms+$vocab_count)); //posterior probability review C di kelas negatif
 		}
 		
-		//P kelas positif dokumen C = P kelas positif (prior probability)* posterior probability
-		$pos_prob_visitor = $pos_prior_prob+$pos_post_prob;
+		//likelihood kelas positif dokumen C = P kelas positif (prior probability)* posterior probability
+		//log likelihood kelas positif dokumen C = log prior probability + sum log posterior probability
+		$pos_likelihood_visitor = $pos_prior_prob+$pos_post_prob; //log probability
+			
+		//likelihood kelas negatif dokumen C = P kelas negatif (prior probability)* posterior probability
+		//log likelihood kelas negatif dokumen C = log prior probability + sum log posterior probability
+		$neg_likelihood_visitor = $neg_prior_prob+$neg_post_prob; //log probability
 		
-		//P kelas negatif dokumen C = P kelas negatif (prior probability)* posterior probability
-		$neg_prob_visitor = $neg_prior_prob+$neg_post_prob;
+		$array_prob = $this->normalize_log($pos_likelihood_visitor,$neg_likelihood_visitor);
+		$pos_prob_visitor = $array_prob["pos_prob"];
+		$neg_prob_visitor = $array_prob["neg_prob"];
 		
-		//ambil kelas terbaik (which one of 2 classes is higher in probability)
+		//ambil kelas terbaik
 		$best_class= $this->best_class($pos_prob_visitor,$neg_prob_visitor);
 		
 		//masukkan hasil perhitungan ke dalam array hasil klasifikasi
@@ -368,9 +398,11 @@ class M_Classifier extends CI_Model{
 		
 		$akurasi = ($true_positives+$true_negatives)/$total_datauji; //AKURASI :(true positives+true negatives)/total data uji
 		$error_rate = 1- $akurasi; //ERROR-RATE : 1 - akurasi (tingkat kesalahan sistem)
-		$presisi = $true_positives/($true_positives+$false_positives); //PRESISI :true positives/(true positives+false positives)
-		$recall = $true_positives/($true_positives+$false_negatives); //RECALL: true positives/(true positives+false negatives)
-		$array_data_matriks = array($total_datauji, $true_positives, $true_negatives, $false_positives, $false_negatives, $akurasi, $error_rate, $presisi, $recall);
+		$ppv = $true_positives/($true_positives+$false_positives); //POSITIVE PREDICTION VALUE /PRESISI : true positives/(true positives+false positives)
+		$npv = $true_negatives/($true_negatives+$false_negatives); //NEGATIVE PREDICTION VALUE : true negatives/(true negatives+false negatives)
+		$sensitivity = $true_positives/($true_positives+$false_negatives); //SENSITIVITY /RECALL : true positives/(true positives+false negatives)
+		$specificity = $true_negatives/($true_negatives+$false_positives); //SPECITIVITY : true negatives/(true negatives+false positives)
+		$array_data_matriks = array($total_datauji, $true_positives, $true_negatives, $false_positives, $false_negatives, $akurasi, $error_rate, $ppv, $npv, $sensitivity, $specificity);
 		return $array_data_matriks;
 	}
 	
