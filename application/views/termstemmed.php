@@ -37,7 +37,7 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th width="25">Judul Review</th>
+                                            <th width="25%">Judul Review</th>
                                             <th>Kumpulan Term Setelah Stemming</th>
                                         </tr>
                                     </thead>

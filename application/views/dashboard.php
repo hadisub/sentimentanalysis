@@ -101,7 +101,7 @@
 				</div>
 			</div>
 			<!--AKHIR DARI CHART-->
-			
+			<?php print_r($testing);?>
     </div>
     <footer><p class="text-center">Copyright &copy 2017 Sentiment Analysis | All right reserved.</a></p></footer>
 </div>

@@ -11,7 +11,7 @@ $(document).ready(function () {
        },
     "processing": true,
     "serverSide": true,
-    "ajax": url +"dataset/kata"
+    "ajax": url +"dataset/review"
    });
 
    $(document).on('click', ".btn-delete", function(e){

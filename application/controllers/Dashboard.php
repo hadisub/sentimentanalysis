@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller{
 		$data['pos_traindata'] = $this->m_classifier->count_pos_traindata();
 		$data['neg_traindata'] = $this->m_classifier->count_neg_traindata();
 		$data['total_testdata'] = $this->m_classifier->count_total_testdata();
+		$data['testing'] = $this->m_classifier->naive_bayes_visitor('gal gadot');
 		$this->load->view('dashboard',$data);
 	}
 }

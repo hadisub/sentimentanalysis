@@ -19,7 +19,7 @@
 
     		<div class="row">
                 <div class="col-md-12">
-                    <h2 class="page-header">Perhitungan Akurasi Sistem Analisis Sentimen</h2>
+                    <h2 class="page-header">Penghitungan Akurasi Sistem Analisis Sentimen</h2>
                 </div>
             </div>
 

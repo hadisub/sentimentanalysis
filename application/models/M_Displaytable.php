@@ -24,16 +24,16 @@ class M_Displaytable extends CI_Model
 
 	public function displaytabeltrain($start, $length, $search_query){
 		$this->db->like('term', $search_query);
-		$this->db->from('sa_term');
+		$this->db->from('sa_vocabulary');
 		$this->db->order_by('term','ASC');
 		$totalfilter = $this->db->count_all_results();
 
 		$this->db->like('term', $search_query);
-		$this->db->from('sa_term');
+		$this->db->from('sa_vocabulary');
 		$this->db->order_by('term','ASC');
 		$this->db->limit($length, $start);
 		$data = $this->db->get()->result_array();
-		$total = $this->db->count_all_results('sa_term');
+		$total = $this->db->count_all_results('sa_vocabulary');
 		return [
 			"data" => $data,
 			"total" => $total,

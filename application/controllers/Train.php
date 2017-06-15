@@ -16,8 +16,8 @@ class Train extends CI_Controller{
 		$this->load->view('train',$data);
 	}
 	
-	public function insert_term_occ(){
-		$this->m_classifier->insert_term();
+	public function insert_train(){
+		$this->m_classifier->insert_train();
 	}
 	
 	public function tabeltrain(){
@@ -30,7 +30,9 @@ class Train extends CI_Controller{
 				$no++,
 				$key['term'],
 				$key['pos_occ'],
-				$key['neg_occ']
+				$key['neg_occ'],
+				$key['pos_likelihood'],
+				$key['neg_likelihood']
 			];
 		}
 

@@ -26,12 +26,13 @@ $(document).ready(function () {
 		$('#divtabeltraining').addClass('loader');
 		//INSERT TERM OCCURENCES
 		$.ajax({
-			url: url + "train/insert_term_occ",
+			url: url + "train/insert_train",
 			success: function(){
                 $('#divtabeltraining').removeClass('loader');
             },
 			error: function(){
                  $('#divtabeltraining').removeClass('loader');
+				 alert('Tidak dapat memperbarui tabel');
             }
 		});
  		$('#divtabeltraining').load(url+'train/displaytabeltrain', function(){

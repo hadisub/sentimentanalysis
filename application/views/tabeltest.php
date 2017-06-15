@@ -1,9 +1,11 @@
 <!--TABEL DATA UJI -->
 <div class="row">
-	<div class="col-lg-5 col-lg-offset-7 text-right">
+	<div class="col-lg-5 col-lg-offset-7 text-right" id="persentase-wrapper">
         <h2>Akurasi Sistem : <span id="akurasi-percentage"></span>%</h2>
 		<p style="padding:0; margin: 10px 0px;"><a href="#confusion-matrix" class="link">Lihat Selengkapnya</a></p>
 	</div>
+</div>
+<div class="row" id="table-wrapper">
     <div class="col-md-12 panel panel-default">
 		<div class="panel-heading text-center">
             Tabel Data Uji
@@ -16,7 +18,7 @@
                         <tr>
                             <th>No.</th>
                             <th width="25%">Judul Review</th>
-                            <th>Label Awal</th>
+                            <th>Sentimen Asli</th>
                             <th>P <em>Pos</em></th>
                             <th>P <em>Neg</em></th>
                             <th>Hasil Analisis</th>
@@ -36,16 +38,16 @@
 					<table class="table table-bordered">
 						<tr>
 							<td>Jumlah Data Uji : <span id="total-datauji"></span></td>
-							<td><strong>Hasil Analisis POSITIF</strong></td>
-							<td><strong>Hasil Analisis NEGATIF</strong></td>
+							<td><strong>Sentimen Hasil Analisis POSITIF</strong></td>
+							<td><strong>Sentimen Hasil Analisis NEGATIF</strong></td>
 						</tr>
 						<tr>
-							<td><strong>Label Awal POSITIF</strong></td>
+							<td><strong>Sentimen Asli POSITIF</strong></td>
 							<td><strong>T</strong>rue <strong>P</strong>ositives = <span id="true-positives"></span></td>
 							<td><strong>F</strong>alse <strong>N</strong>egatives = <span id="false-negatives"></span></td>
 						</tr>
 						<tr>
-							<td><strong>Label Awal NEGATIF</strong></td>
+							<td><strong>Sentimen Asli NEGATIF</strong></td>
 							<td><strong>F</strong>alse <strong>P</strong>ositives = <span id="false-positives"></span></td>
 							<td><strong>T</strong>rue <strong>N</strong>egatives = <span id="true-negatives"></span></td>
 						</tr>
@@ -89,7 +91,7 @@
 		</div>
 				<div class="alert alert-info">
 			<table class="borderless">
-				<th width="310"><strong>Specitivity (TN/TN+FP)</strong></th>
+				<th width="310"><strong>Specificity (TN/TN+FP)</strong></th>
 				<th width="20">=</th>
 				<th><span id="specificity"></span></th>
 			</table>

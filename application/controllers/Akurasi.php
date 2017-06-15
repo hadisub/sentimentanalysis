@@ -30,8 +30,8 @@ class Akurasi extends CI_Controller{
 				$no++,
 				$key['judul_review'],
 				$key['sentimen_review'],
-				$key['prob_pos_datauji'],
-				$key['prob_neg_datauji'],
+				$key['pos_post_prob'],
+				$key['neg_post_prob'],
 				$key['sentimen_datauji'],
 				$this->m_classifier->accuracy_badge($key['sentimen_review'],$key['sentimen_datauji'])
 			];

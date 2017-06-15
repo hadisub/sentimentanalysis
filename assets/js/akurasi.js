@@ -59,16 +59,21 @@ $(document).ready(function () {
   
   $('#akurasibtn').click(function(){
     $('#divtabeltest').html('');
+	$('#persentase-wrapper').html('');
     $('#divtabeltest').addClass('loader');
+	$('#persentase-wrapper').hide();
 	//INSERT HASIL PERHITUNGAN DATA UJI
     $.ajax({
        url: url + "akurasi/insert_datauji",
        success: function(){
 				loadmatrix();
 				$('#divtabeltest').removeClass('loader');
+				$('#persentase-wrapper').show();
              },
        error: function(){
                 $('#divtabeltest').removeClass('loader');
+				$('#persentase-wrapper').show();
+				alert("Tidak dapat memperbarui tabel");
              }
     });
     $('#divtabeltest').load(url+'akurasi/displaytabeltest', function(){

@@ -78,7 +78,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
-                  <h4 class="modal-title text-center"><span class="modal-action">Tambah</span> Data Review Baru</h4>
+                  <h4 class="modal-title text-center"><span class="modal-action">Tambah</span> Data Review</h4>
               </div>
               <div class="modal-body">
                       <input type="hidden" name="id_review" id="id_review" value="">

@@ -11,9 +11,11 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th width="25%">Term</th>
-                            <th>Jumlah Kemunculan di Data Latih Positif</th>
-                            <th>Jumlah Kemunculan di Data Latih Negatif</th>
+                            <th width="25%" style="text-align:center;">Term</th>
+                            <th style="text-align:center;">Jumlah Kemunculan di Data Latih Positif</th>
+                            <th style="text-align:center;">Jumlah Kemunculan di Data Latih Negatif</th>
+							<th style="text-align:center;"><em>log</em> Likelihood Term di Data Latih Positif</th>
+                            <th style="text-align:center;"><em>log</em> Likelihood Term di Data Latih Negatif</th>
                         </tr>
                     </thead>
                 </table>

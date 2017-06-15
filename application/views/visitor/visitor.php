@@ -52,7 +52,7 @@
 <div class="jumbotron sa-jumbotron text-center" id="jumbo">
     <div class="container jumbo-vertical-center">
         <h1>Sistem Analisis Sentimen <br> Review Film</h1>
-        <p>Ini adalah versi publik dari sistem analisis sentimen review film. Sistem ini dapat memberitahu anda sentimen dari review film yang anda masukkan. 
+        <p>Ini adalah versi publik dari sistem analisis sentimen review film. Sistem ini dapat memberi anda informasi tentang sentimen dari review film yang anda masukkan. 
 		Sentimen dari review anda dapat berupa sentimen positif atau negatif.
         </p>
     </div>

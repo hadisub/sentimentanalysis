@@ -21,7 +21,7 @@ class Dataset extends CI_Controller
 		$this->load->view('dataset',$data);
 	}
 
-	public function kata(){
+	public function review(){
 		$query = $this->m_displaytable->displaydataset($_GET['start'], $_GET['length'], $_GET['search']['value']);
 		
 		$no = $this->input->get('start')+1;
@@ -67,7 +67,7 @@ class Dataset extends CI_Controller
 			$this->session->set_flashdata('notification','input_review_success');
 		}
 		else{
-			$this->session->set_flashdata('notification','input_rreview_error');
+			$this->session->set_flashdata('notification','input_review_error');
 		}
 		redirect('dataset');
 	}

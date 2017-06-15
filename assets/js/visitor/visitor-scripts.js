@@ -26,10 +26,10 @@ function extract_review(){
 }
 
 function print_analysis_contents(contents){
-	//console.log(contents);
 	$("#pos-prob").append(contents[0]);
 	$("#neg-prob").append(contents[1]);
 	$("#visitor-sentimen").append(contents[2]);
+	console.log(contents);
 }
 
 $(document).ready(function(){
