@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2017 at 01:47 PM
--- Server version: 10.1.19-MariaDB
+-- Generation Time: 08 Jul 2017 pada 13.29
+-- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_bagofwords`
+-- Struktur dari tabel `sa_bagofwords`
 --
 
 CREATE TABLE `sa_bagofwords` (
@@ -35,7 +35,7 @@ CREATE TABLE `sa_bagofwords` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_bagofwords`
+-- Dumping data untuk tabel `sa_bagofwords`
 --
 
 INSERT INTO `sa_bagofwords` (`id_bagofwords`, `id_review`, `term_tokenized`, `term_filtered`, `term_stemmed`) VALUES
@@ -1263,7 +1263,7 @@ INSERT INTO `sa_bagofwords` (`id_bagofwords`, `id_review`, `term_tokenized`, `te
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_datauji`
+-- Struktur dari tabel `sa_datauji`
 --
 
 CREATE TABLE `sa_datauji` (
@@ -1275,7 +1275,7 @@ CREATE TABLE `sa_datauji` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_datauji`
+-- Dumping data untuk tabel `sa_datauji`
 --
 
 INSERT INTO `sa_datauji` (`id_datauji`, `id_review`, `pos_post_prob`, `neg_post_prob`, `sentimen_datauji`) VALUES
@@ -1484,7 +1484,7 @@ INSERT INTO `sa_datauji` (`id_datauji`, `id_review`, `pos_post_prob`, `neg_post_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_katadasar`
+-- Struktur dari tabel `sa_katadasar`
 --
 
 CREATE TABLE `sa_katadasar` (
@@ -1493,7 +1493,7 @@ CREATE TABLE `sa_katadasar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_katadasar`
+-- Dumping data untuk tabel `sa_katadasar`
 --
 
 INSERT INTO `sa_katadasar` (`id_katadasar`, `kata_katadasar`) VALUES
@@ -31443,7 +31443,7 @@ INSERT INTO `sa_katadasar` (`id_katadasar`, `kata_katadasar`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_review`
+-- Struktur dari tabel `sa_review`
 --
 
 CREATE TABLE `sa_review` (
@@ -31455,7 +31455,7 @@ CREATE TABLE `sa_review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_review`
+-- Dumping data untuk tabel `sa_review`
 --
 
 INSERT INTO `sa_review` (`id_review`, `judul_review`, `sentimen_review`, `kategori_review`, `isi_review`) VALUES
@@ -32674,7 +32674,7 @@ INSERT INTO `sa_review` (`id_review`, `judul_review`, `sentimen_review`, `katego
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_stopwords`
+-- Struktur dari tabel `sa_stopwords`
 --
 
 CREATE TABLE `sa_stopwords` (
@@ -32683,7 +32683,7 @@ CREATE TABLE `sa_stopwords` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_stopwords`
+-- Dumping data untuk tabel `sa_stopwords`
 --
 
 INSERT INTO `sa_stopwords` (`id_stopwords`, `kata_stopwords`) VALUES
@@ -33447,7 +33447,7 @@ INSERT INTO `sa_stopwords` (`id_stopwords`, `kata_stopwords`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_user`
+-- Struktur dari tabel `sa_user`
 --
 
 CREATE TABLE `sa_user` (
@@ -33458,7 +33458,7 @@ CREATE TABLE `sa_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_user`
+-- Dumping data untuk tabel `sa_user`
 --
 
 INSERT INTO `sa_user` (`id`, `username`, `nama`, `password`) VALUES
@@ -33467,7 +33467,7 @@ INSERT INTO `sa_user` (`id`, `username`, `nama`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sa_vocabulary`
+-- Struktur dari tabel `sa_vocabulary`
 --
 
 CREATE TABLE `sa_vocabulary` (
@@ -33480,7 +33480,7 @@ CREATE TABLE `sa_vocabulary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sa_vocabulary`
+-- Dumping data untuk tabel `sa_vocabulary`
 --
 
 INSERT INTO `sa_vocabulary` (`id_term`, `term`, `pos_occ`, `neg_occ`, `pos_likelihood`, `neg_likelihood`) VALUES
@@ -39360,11 +39360,11 @@ ALTER TABLE `sa_user`
 ALTER TABLE `sa_vocabulary`
   MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5785;
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `sa_bagofwords`
+-- Ketidakleluasaan untuk tabel `sa_bagofwords`
 --
 ALTER TABLE `sa_bagofwords`
   ADD CONSTRAINT `sa_bagofwords_ibfk_1` FOREIGN KEY (`id_review`) REFERENCES `sa_review` (`id_review`) ON DELETE CASCADE ON UPDATE CASCADE;
